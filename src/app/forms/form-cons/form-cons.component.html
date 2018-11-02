@@ -1,0 +1,33 @@
+
+<mat-horizontal-stepper >
+  <mat-step [stepControl]="formGroup1">
+    <form [formGroup]="formGroup1">
+      <mat-form-field appearance = "outline">
+        <mat-label>Fecha Form</mat-label>
+        <input matInput placeholder="Nombre" formControlName="nombre">
+      </mat-form-field>
+    </form>
+
+  </mat-step>
+  <mat-step [stepControl]="formGroup2">
+    <form [formGroup]="formGroup2">
+      <mat-form-field appearance= "outline">
+          <input formControlName="formDate" matInput [matDatepicker]="picker" placeholder="Choose a date">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+
+      </mat-form-field>
+      <mat-form-field appearance = "outline">
+        <mat-label>Motonave</mat-label>
+        <input matInput placeholder="Motonave" formControlName="container">
+      </mat-form-field>
+      <mat-form-field appearance = "outline">
+        <mat-label>Importador</mat-label>
+        <input matInput placeholder="Importador" formControlName="importer">
+      </mat-form-field>
+
+    </form>
+  </mat-step>
+</mat-horizontal-stepper>
+
+Value: {{formGroup1.value | json }}
