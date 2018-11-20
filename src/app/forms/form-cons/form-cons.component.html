@@ -1,33 +1,280 @@
 
-<mat-horizontal-stepper >
-  <mat-step [stepControl]="formGroup1">
-    <form [formGroup]="formGroup1">
-      <mat-form-field appearance = "outline">
-        <mat-label>Fecha Form</mat-label>
-        <input matInput placeholder="Nombre" formControlName="nombre">
-      </mat-form-field>
-    </form>
+<!-- <mat-card> -->
+  <mat-horizontal-stepper >
+    <!-- ******************  FORMULARIO 1 ************************-->
+    <!-- *                                                       *-->
+    <!-- ******************  FORMULARIO 1 ************************-->
+    <mat-step [stepControl]="formGroup1" >
 
-  </mat-step>
-  <mat-step [stepControl]="formGroup2">
-    <form [formGroup]="formGroup2">
-      <mat-form-field appearance= "outline">
-          <input formControlName="formDate" matInput [matDatepicker]="picker" placeholder="Choose a date">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
+      <mat-card>
+        <mat-card-subtitle>DATOS PRINCIPALES</mat-card-subtitle>
+        <form [formGroup]="formGroup1">
 
-      </mat-form-field>
-      <mat-form-field appearance = "outline">
-        <mat-label>Motonave</mat-label>
-        <input matInput placeholder="Motonave" formControlName="container">
-      </mat-form-field>
-      <mat-form-field appearance = "outline">
-        <mat-label>Importador</mat-label>
-        <input matInput placeholder="Importador" formControlName="importer">
-      </mat-form-field>
+          <div class="container">
+            <div class="row">
+              <!-- <div class="col-lg-4 col-sm-12"> -->
+                <!-- <mat-form-field >
+                  <input disabled formControlName="fecha" matInput [matDatepicker]="picker1" placeholder="Fecha" disabled="false">
+                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                  <mat-datepicker #picker1></mat-datepicker>
+                </mat-form-field> -->
+                <mat-form-field>
+                  <!-- <mat-label style ="text-align: right;" >Fecha: &nbsp; {{ formGroup1.controls['fecha'].value | date: "dd/MM/yy" }}</mat-label> -->
+                  <mat-label>Fecha</mat-label>
+                  <input matInput formControlName="fecha" >
+                </mat-form-field>
+              <!-- </div> -->
+                  <mat-form-field>
+                    <mat-label>Cliente</mat-label>
+                    <input  matInput formControlName="client">
+                  </mat-form-field>
+              <div class="col-lg-4 col-sm-12">
+                <mat-form-field>
+                  <mat-label>Planta</mat-label>
+                  <input matInput placeholder="Planta" formControlName="planta">
+                </mat-form-field>
+              </div>
+              <div class="col-lg-4 col-sm-12">
+                <mat-form-field>
+                  <mat-label>Orden de Embarque</mat-label>
+                  <input matInput placeholder="Orden de Embarque" formControlName="order">
+                </mat-form-field>
 
-    </form>
-  </mat-step>
-</mat-horizontal-stepper>
+              </div>
+            </div>
+          </div>
+        </form>
+        <mat-card-footer>
+            <button class="bt-right" mat-raised-button mat-button matStepperNext color="primary">Siguiente</button>
+        </mat-card-footer>
 
-Value: {{formGroup1.value | json }}
+
+
+
+      </mat-card>
+    </mat-step>
+
+    <!-- ******************  FORMULARIO 2 ************************-->
+    <!-- *                                                       *-->
+    <!-- ******************  FORMULARIO 2 ************************-->
+
+    <mat-step [stepControl]="formGroup2">
+
+    <mat-card>
+      <mat-card-header>
+        <mat-card-subtitle>IDENTIFICACIÓN DE CARGA</mat-card-subtitle>
+      </mat-card-header>
+      <form [formGroup]="formGroup2">
+        <!-- <section class="example-section"> -->
+          <mat-form-field >
+            <mat-label>Contenedor</mat-label>
+            <input  matInput type="number" placeholder="Contenedor" formControlName="container">
+          </mat-form-field>
+
+          <mat-form-field  >
+            <mat-label>Motonave</mat-label>
+            <input matInput placeholder="Motonave" maxlength="5" formControlName="motonave">
+            <!-- <mat-hint align="end">{{ x.vaue / 5}}</mat-hint> -->
+
+          </mat-form-field>
+        <!-- </section> -->
+        <mat-form-field style="width: 40%;">
+          <mat-label>Importador/Recibidor</mat-label>
+          <input matInput placeholder="Importador" formControlName="importer">
+        </mat-form-field>
+        <mat-form-field >
+          <mat-label>Puero de Carga</mat-label>
+          <input matInput placeholder="Puerto de Carga" formControlName="portOrig">
+        </mat-form-field>
+        <mat-form-field >
+          <mat-label>Especie</mat-label>
+          <!-- <input matInput placeholder="Especie" formControlName="espices"> -->
+
+          <!-- <mat-select formControlName="espices" placeholder="Selecciona Especie">
+              <mat-option *ngFor="let e of esp" [value]= 'espices.value'>
+                {{ e }}
+              </mat-option>
+          </mat-select> -->
+
+          <mat-select formControlName="espices" placeholder="Selecciona Especie">
+              <mat-option *ngFor="let e of mySpecie" [value]= 'e.value'>
+                {{ e.viewValue }}
+              </mat-option>
+          </mat-select>
+
+
+
+
+        </mat-form-field>
+        <mat-form-field >
+          <mat-label>Patente de Camión</mat-label>
+          <input matInput placeholder="Patente Camion" formControlName="patenteCamion">
+        </mat-form-field>
+        <mat-form-field >
+          <mat-label>Patente de Carro</mat-label>
+          <input matInput placeholder="Importador" formControlName="patenteCarro">
+        </mat-form-field>
+        <mat-form-field >
+          <mat-label>Booking</mat-label>
+          <input matInput placeholder="Importador" formControlName="booking">
+        </mat-form-field>
+        <mat-form-field >
+          <mat-label>Cantidad de Pallets</mat-label>
+          <input matInput placeholder="Importador" formControlName="cantPallets">
+        </mat-form-field>
+        <mat-form-field >
+          <mat-label>Hora de Cargas</mat-label>
+          <input matInput placeholder="Importador" formControlName="horaCarga">
+        </mat-form-field>
+
+      </form>
+
+
+          <mat-card-footer>
+              <button class="bt-left" mat-raised-button mat-button matStepperPrevious color="primary">Anterior</button>
+              <button class="bt-right" mat-raised-button mat-button matStepperNext color="primary">Siguiente</button>
+            </mat-card-footer>
+    </mat-card>
+    </mat-step>
+    <!-- ******************  FORMULARIO 3 ************************-->
+    <!-- *                                                       *-->
+    <!-- ******************  FORMULARIO 3 ************************-->
+    <mat-step [stepControl] = "formGroup3">
+      <mat-card>
+          <mat-card-header>
+              <mat-card-subtitle>ESPECIFICAION CONTENEDOR</mat-card-subtitle>
+            </mat-card-header>
+        <form [formGroup]= "formGroup3">
+        <mat-form-field>
+          <mat-label>Conenedor Pre-enfriado</mat-label>
+          <input matInput placeholder= "" formControlName="preEnfriado">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Limpio y sin Olores</mat-label>
+          <input  matInput placeholder= "" formControlName="limpio">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>En bune estado</mat-label>
+          <input matInput placeholder= "" formControlName="buenEstado">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Tipo de Carga</mat-label>
+          <input matInput placeholder= "" formControlName="tipoCarga">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Seteo de Contenedor</mat-label>
+          <input matInput placeholder= "" formControlName="seteoContainer">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Ventilación (CBM)</mat-label>
+        <input matInput placeholder= "" formControlName="ventilacion">
+        </mat-form-field>
+
+
+      </form>
+      <mat-card-footer>
+        <button class="bt-left" mat-raised-button mat-button matStepperPrevious color="primary">Anterior</button>
+        <button class="bt-right" mat-raised-button mat-button matStepperNext color="primary">Siguiente</button>
+      </mat-card-footer>
+
+    </mat-card>
+    </mat-step>
+    <!-- ******************  FORMULARIO 4 ************************-->
+    <!-- *                                                       *-->
+    <!-- ******************  FORMULARIO 4 ************************-->
+      <mat-step [stepControl]="formGroup4">
+
+        <mat-card>
+          <mat-card-header>
+              <mat-card-subtitle>OBSERVACIÓN Y COMENTARIOS </mat-card-subtitle>
+          </mat-card-header>
+        <form [formGroup]="formGroup4">
+          <mat-form-field>
+            <textarea matInput
+            cdkTextareaAutosize
+            placeholder="Comentarios"
+            formControlName= "coments"
+            style= "height: 200px;" ></textarea>
+          </mat-form-field>
+        </form>
+        <mat-card-footer>
+          <button style="margin: 20px;" mat-raised-button mat-button matStepperPrevious color="primary">Anterior</button>
+          <button style="margin: 20px;" mat-raised-button mat-button matStepperNext color="primary">Siguiente</button>
+        </mat-card-footer>
+      </mat-card>
+    </mat-step>
+
+    <mat-step>
+      <mat-card>
+          <mat-card-header>
+              <mat-card-subtitle>FOTOS DE CONSOLIDACION DE CARGA</mat-card-subtitle>
+            </mat-card-header>
+        <mat-grid-list cols="2" rowHeight="2:2">
+          <!-- <app-foto-upload-input></app-foto-upload-input> -->
+
+          <mat-grid-tile (click)= "fileInput.click($event)" [style.background-color]= "uploaded ? 'skyblue': ''" >
+              <!-- <img [src]= "fileUrl"> -->
+              <span> {{ uploaded?  fileName : 'Tipo Consolidad' }}</span>
+                <input style= "display: none;"
+                 accept="image/x-png,image/gif,image/jpeg"
+                 #fileInput
+                 type="file"
+                 (change)="onFileChange($event)" />
+            </mat-grid-tile>
+            <mat-grid-tile>Patente de Cambión
+
+
+            </mat-grid-tile>
+
+            <mat-grid-tile>Patente de Carro</mat-grid-tile>
+            <mat-grid-tile>Seteo de Contenedor</mat-grid-tile>
+            <mat-grid-tile>Lampa de Contenedor</mat-grid-tile>
+            <mat-grid-tile>Detalle de Contenedor</mat-grid-tile>
+            <mat-grid-tile>Cartones Inicio de Carga</mat-grid-tile>
+            <mat-grid-tile>Encendido Termografo1</mat-grid-tile>
+            <mat-grid-tile>Encendido Termografo2</mat-grid-tile>
+            <mat-grid-tile>Nro. Termografos</mat-grid-tile>
+            <mat-divider></mat-divider>
+        </mat-grid-list>
+        <mat-card-footer>
+            <button class="bt-left" mat-raised-button mat-button matStepperPrevious color="primary">Anterior</button>
+            <button class="bt-right" mat-raised-button mat-button matStepperNext color="primary">Siguiente</button>
+        </mat-card-footer>
+      </mat-card>
+    </mat-step>
+    <mat-step>
+      <mat-card>
+          <mat-card-header>
+            <mat-card-title>
+              Resumen de Datos
+            </mat-card-title>
+            <mat-card-subtitle>
+              Verfique los datos antes de enviar.
+              </mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p> Datos de Formulario para envio </p>
+            <p> .</p>
+            <p> .</p>
+            <p> .</p>
+            <p> .</p>
+            <p> .</p>
+
+
+            <section class="example-section">
+              <mat-checkbox  [(ngModel)] = 'isValidForm' > Confirmo que los datos son correctos! &nbsp;</mat-checkbox>
+              <!-- <mat-checkbox> Check me! </mat-checkbox> -->
+            </section>
+
+          </mat-card-content>
+          <mat-card-footer>
+            <button [disabled]= 'isValidForm ? false : true'  style="margin: 20px;" mat-raised-button mat-button color="primary">Enviar</button>
+          </mat-card-footer>
+        </mat-card>
+    </mat-step>
+  </mat-horizontal-stepper>
+
+  <!-- Value: {{formGroup1.value| json }}
+  <br>
+  Value: {{formGroup2.value| json }} -->
+<!-- </mat-card> -->

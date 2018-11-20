@@ -1,0 +1,24 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "~font-awesome/css/font-awesome.css";
+
+@import "variables";
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+// Import Reboot
+@import "~bootstrap/scss/reboot";
+@import "~bootstrap/scss/grid";
+@import "reset";
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.bt-left{
+  float: left;
+  margin-top: 20px;
+}
+.bt-right{
+  float: right;
+  margin-top: 20px;
+}

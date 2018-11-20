@@ -1,0 +1,26 @@
+.mat-form-field{
+  width: 100%;
+}
+
+// .mat-horizontal-content-container { padding: 0 10px 24px 10px; }
+// ::ng-deep .mat-horizontal-stepper, .mat-horizontal-content-container{
+//   border: dashed 1px blue;
+//   padding: 1px;
+// }
+// ::ng-deep .mat-horizontal-stepper-header-container {
+//   border: solid 1px red;
+//}
+
+.mat-grid-tile{
+  padding: 20px, 20px, 20px, 10px;
+  background-color: darkgrey;
+  border-color: black;
+  text-align: center;
+}
+.example-section {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 60px;
+  padding-right: 1rem;
+}

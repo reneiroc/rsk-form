@@ -7,24 +7,34 @@ import {MatButtonModule,
   MatDatepickerModule,
   MatToolbarModule,
   MatStepperModule,
-
-  MatNativeDateModule} from '@angular/material';
+  MatNativeDateModule,
+  MatCardModule,
+  MatGridListModule,
+  MatDividerModule,
+  MatCheckboxModule,
+  MatSelectModule
+  } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { FormConsComponent } from './forms/form-cons/form-cons.component';
 import { HeaderComponent } from './header/header.component';
+import { HttpClientModule } from '@angular/common/http';
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
     FormConsComponent,
-    HeaderComponent
+    HeaderComponent,
+
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
+    MatCardModule,
     MatFormFieldModule,
     MatDatepickerModule,
     MatNativeDateModule,
@@ -33,6 +43,11 @@ import { HeaderComponent } from './header/header.component';
     MatInputModule,
     MatToolbarModule,
     MatStepperModule,
+    MatGridListModule,
+    MatDividerModule,
+    HttpClientModule,
+    MatCheckboxModule,
+    MatSelectModule
 
   ],
 

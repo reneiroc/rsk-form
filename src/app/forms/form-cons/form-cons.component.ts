@@ -1,33 +1,101 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+// import {MatCheckbox } from '@angular/material/checkbox';
+
+export interface Specie {
+  value: string;
+  viewValue: string;
+}
 
 @Component({
   selector: 'app-form-cons',
   templateUrl: './form-cons.component.html',
-  styleUrls: ['./form-cons.component.css']
+  styleUrls: ['./form-cons.component.scss']
 })
 export class FormConsComponent implements OnInit {
 
   formGroup1: FormGroup;
   formGroup2: FormGroup;
+  formGroup3: FormGroup;
+  formGroup4: FormGroup;
+  fileUrl:  'http://rcwebmaster.com/images/avatars/cliente_2.jpg';
+  fileName: string;
   isOptional = false;
-  formDate: Date = null;
+  uploaded = false;
+  selectedFile: File = null;
   constructor(private _fb: FormBuilder) {}
+  isValidForm = false;
+  today = new Date();
+  // specie = ['Uva', 'Pera', 'Frutilla', 'Manzana'];
+  mySpecie: Specie[] = [
+    {value: 'uva-0', viewValue: 'Uvas'},
+    {value: 'frutilla-1', viewValue: 'Peras'},
+    {value: 'pera-2', viewValue: 'Frutilla'},
+    {value: 'manzana-4', viewValue: 'Manzanas'},
+    {value: 'manzana-4', viewValue: 'Manzanas'},
+    {value: 'manzana-4', viewValue: 'Manzanas'},
+    {value: 'manzana-4', viewValue: 'Manzanas'},
+    {value: 'manzana-4', viewValue: 'Manzanas'},
+    {value: 'manzana-4', viewValue: 'Manzanas'},
+    {value: 'manzana-4', viewValue: 'Manzanas'},
+    {value: 'manzana-4', viewValue: 'Manzanas'},
+    {value: 'manzana-4', viewValue: 'Manzanas'},
+    {value: 'manzana-4', viewValue: 'Manzanas'},
+    {value: 'manzana-4', viewValue: 'Manzanas'}
 
+  ];
+
+  esp = ['Uva', 'Pera', 'Fresa'];
   ngOnInit() {
+
+
     this.formGroup1 = this._fb.group({
-      nombre: '',
+      fecha: this.today.toLocaleString('en-GB'),
       order: [''],
       planta: [''],
-      client: [''],
+      client: 'Grower'
 
     });
+    this.formGroup1.controls['client'].disable();
+    this.formGroup1.controls['fecha'].disable();
     this.formGroup2 = this._fb.group({
       formDate: ['null', Validators.required],
       container: '',
       motonave: '',
-      importer: ''
+      importer: '',
+      portDest: '',
+      portOrig: '',
+      espices: '',
+      patenteCamion: '',
+      patenteCarro: '',
+      booking: '',
+      empresaTrasnporte: '',
+      cantPallets: '',
+      horaCarga: '',
+      nroSeroContainer: '',
+      nroBolsas: ''
     });
-  }
+    this.formGroup3 = this._fb.group({
+      preEnfriado: '',
+      limpio: '',
+      buenEstado: '',
+      tipoCarga: '',
+      seteoContainer: '',
+      ventilacion: ''
 
+    });
+    this.formGroup4 = this._fb.group({
+      coments: ''
+    });
+
+  }
+  onFileChange(event) {
+    console.log (event);
+    this.selectedFile = event.target.files[0];
+    this.fileName = this.selectedFile.name;
+    this.uploaded = true;
+  }
+  onClick(event) {
+    console.log (event);
+  }
 }
