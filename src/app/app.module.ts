@@ -20,6 +20,7 @@ import { AppComponent } from './app.component';
 import { FormConsComponent } from './forms/form-cons/form-cons.component';
 import { HeaderComponent } from './header/header.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FormService } from './form.service';
 
 
 
@@ -51,7 +52,7 @@ import { HttpClientModule } from '@angular/common/http';
 
   ],
 
-  providers: [],
+  providers: [FormService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

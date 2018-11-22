@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import {MAT_STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
+
 // import {MatCheckbox } from '@angular/material/checkbox';
 
 export interface Specie {
@@ -10,7 +12,10 @@ export interface Specie {
 @Component({
   selector: 'app-form-cons',
   templateUrl: './form-cons.component.html',
-  styleUrls: ['./form-cons.component.scss']
+  styleUrls: ['./form-cons.component.scss'],
+  providers: [{
+    provide: MAT_STEPPER_GLOBAL_OPTIONS, useValue: {displayDefaultIndicatorType: false}
+  }]
 })
 export class FormConsComponent implements OnInit {
 
@@ -42,25 +47,28 @@ export class FormConsComponent implements OnInit {
     {value: 'manzana-4', viewValue: 'Manzanas'},
     {value: 'manzana-4', viewValue: 'Manzanas'},
     {value: 'manzana-4', viewValue: 'Manzanas'}
-
   ];
-
+  tipoCarga: Specie[] = [{value: 'Grua', viewValue: 'Grua'},
+  {value: 'Grua', viewValue: 'Carro'},
+  {value: 'Grua', viewValue: 'Camion'}
+];
   esp = ['Uva', 'Pera', 'Fresa'];
   ngOnInit() {
 
 
     this.formGroup1 = this._fb.group({
       fecha: this.today.toLocaleString('en-GB'),
-      order: [''],
-      planta: [''],
+      order: ['Prueba',  Validators.required],
+      planta: ['Prueba', Validators.required],
       client: 'Grower'
 
     });
     this.formGroup1.controls['client'].disable();
     this.formGroup1.controls['fecha'].disable();
+
     this.formGroup2 = this._fb.group({
-      formDate: ['null', Validators.required],
-      container: '',
+      // formDate: ['null', Validators.required],
+      container: ['2323'],
       motonave: '',
       importer: '',
       portDest: '',
@@ -76,8 +84,8 @@ export class FormConsComponent implements OnInit {
       nroBolsas: ''
     });
     this.formGroup3 = this._fb.group({
-      preEnfriado: '',
       limpio: '',
+      preEnfriado: [false],
       buenEstado: '',
       tipoCarga: '',
       seteoContainer: '',
