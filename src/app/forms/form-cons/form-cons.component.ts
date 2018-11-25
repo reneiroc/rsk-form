@@ -22,6 +22,8 @@ export class FormConsComponent implements OnInit {
   formGroup2: FormGroup;
   formGroup3: FormGroup;
   formGroup4: FormGroup;
+  container: '';
+  fomrGroupContainer: FormGroup;
   fileUrl:  'http://rcwebmaster.com/images/avatars/cliente_2.jpg';
   fileName: string;
   isOptional = false;
@@ -46,6 +48,7 @@ export class FormConsComponent implements OnInit {
 a = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima iusto saepe nesciunt non';
 b =  'ex itaque illum optio fugit, enim odit voluptate officiis voluptatum, similique est. Maiores dolor porro tenetur mollitia.';
 comments = this.a.concat(this.b);
+
 puertoCarga: Specie[] = [
   {value: 'Arica', viewValue: 'Arica'},
   {value: 'Iquique', viewValue: 'Iquique'},
@@ -72,9 +75,14 @@ puertoCarga: Specie[] = [
     this.formGroup1.controls['client'].disable();
     this.formGroup1.controls['fecha'].disable();
 
+
     this.formGroup2 = this._fb.group({
       // formDate: ['null', Validators.required],
-      container: [''],
+      container: this._fb.group({
+        letras: ['', Validators.required],
+        numbers: ['', Validators.required],
+        caracter: ['', Validators.required]
+      }),
       motonave: '',
       importer: '',
       portDest: '',
@@ -120,5 +128,10 @@ puertoCarga: Specie[] = [
   getDatos() {
     // return this.formGroup1.get('aliases') as FormArray;
   }
-
+  getContainer() {
+    const a = this.formGroup2.get('container.letras').value;
+    const b = this.formGroup2.get('container.numbers').value;
+    const c = this.formGroup2.get('container.caracter').value;
+    return a.toUpperCase()  + b + c;
+  }
 }

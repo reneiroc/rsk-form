@@ -58,11 +58,37 @@
       </mat-card-header>
       <form [formGroup]="formGroup2">
         <!-- <section class="example-section"> -->
-          <mat-form-field >
+          <!-- <mat-form-field >
             <mat-label>Contenedor</mat-label>
             <input  matInput type="number" placeholder="Contenedor" formControlName="container" maxlength="30" required>
-          </mat-form-field>
+          </mat-form-field> -->
+          <!-- <fieldset [formGroup]="formGroup2.container">
 
+
+
+          </fieldset> -->
+
+            <div formGroupName="container">
+                <mat-form-field style= "width: 100px;">
+                  <mat-label>Container</mat-label>
+                  <input matInput #input maxlength="4" minlength="4" placeholder=" XXXX" formControlName="letras" required>
+
+                  <mat-hint align="end">{{input.value?.length || 0}}/4</mat-hint>
+                </mat-form-field>
+                <mat-form-field style= "width: 100px;">
+                  <input type="number" matInput placeholder="(0-9)" formControlName="numbers" required>
+
+                </mat-form-field>
+                <mat-form-field style= "width: 50px;">
+                  <input  minlength = "1" maxlength="1" matInput placeholder="(0-9)" formControlName="caracter" required>
+
+                </mat-form-field>
+            </div>
+            <!-- <mat-form-field>
+              <input  type = "number" matInput placeholder=" Números" formControlName="numeros">
+
+            </mat-form-field>
+            <input  type = "number" matInput placeholder=" Caracter" formControlName="caracter"> -->
           <mat-form-field  >
             <mat-label>Motonave</mat-label>
             <input matInput placeholder="Motonave" maxlength="40" formControlName="motonave">
@@ -262,28 +288,34 @@
           </mat-card-header>
           <mat-card-content class="grid">
             <p> Datos de Formulario para envio </p>
-            <p> <span>Planta:</span>  <strong> {{ formGroup1.value['planta'] | uppercase }} </strong> </p>
-            <p> <span>Planata: </span> <strong> {{ formGroup1.value['planta'] | uppercase }} </strong></p>
-            <p> <span>Orden de Embarque:</span> <strong>{{ formGroup1.value['order'] | uppercase}}</strong></p>
-            <p> <span>Contenedor:</span><strong> {{ formGroup2.value['container'] | uppercase}}</strong> </p>
-            <p> <span>Moto Nave:</span> <strong>{{ formGroup2.value['motonave'] | uppercase}}</strong> </p>
-            <p> <span>Impor / Export:</span><strong>{{ formGroup2.value['importer'] | uppercase}} </strong></p>
-            <p> <span>Puerto de Carga:</span> <strong>{{ formGroup2.value['portOrig'] | uppercase}}</strong> </p>
-            <p> <span>Especie:</span><strong>{{ formGroup2.value['espices'] | uppercase}}</strong> </p>
-            <p> <span>Patente de Camion: </span><strong>{{ formGroup2.value['patenteCamion'] | uppercase}}</strong> </p>
-            <p> <span>Patente de Carro:</span> <strong>{{ formGroup2.value['patenteCarro'] | uppercase}}</strong> </p>
-            <p> <span>Booking:</span>  <strong> {{ formGroup2.value['booking'] }}</strong> </p>
-            <p> <span>Cantidad de Pallets:</span> <strong>{{ formGroup2.value['cantPallets'] | uppercase}}</strong> </p>
-            <p> <span>Hora de Carga:</span><strong> {{ formGroup2.value['horaCarga'] | uppercase}}</strong> </p>
+            <!-- <p> <span>Planta:</span>  <strong> {{ formGroup1.value['planta'] | uppercase }} </strong> </p> -->
+            <!-- <p> <span>Planata: </span> <strong> {{ formGroup1.value['planta'] | uppercase }} </strong></p> -->
+            <p> <span>Orden de Embarque:</span> <strong>{{ formGroup1.value['order'].toUpperCase() }}</strong></p>
+            <p> <span>Contenedor:</span><strong>
+                {{ getContainer() }}
+              <!-- {{ formGroup2.value['container.letras'] }} -->
+               <!-- {{ formGroup2.get('container.number').value }}
+               {{ formGroup2.get('container.caracter').value }} -->
 
-            <p><span> Pre Enfriado:</span> <strong> {{ formGroup3.value['preEnfriado'] | uppercase  }} </strong></p>
+              </strong> </p>
+            <p> <span>Moto Nave:</span> <strong>{{ formGroup2.value['motonave'].toUpperCase() }}</strong> </p>
+            <p> <span>Impor / Export:</span><strong>{{ formGroup2.value['importer'].toUpperCase() }} </strong></p>
+            <p> <span>Puerto de Carga:</span> <strong>{{ formGroup2.value['portOrig'] | uppercase }}</strong> </p>
+            <p> <span>Especie:</span><strong>{{ formGroup2.value['espices'] }}</strong> </p>
+            <p> <span>Patente de Camion: </span><strong>{{ formGroup2.value['patenteCamion'].toUpperCase() }}</strong> </p>
+            <p> <span>Patente de Carro:</span> <strong>{{ formGroup2.value['patenteCarro'] }}</strong> </p>
+            <p> <span>Booking:</span>  <strong> {{ formGroup2.value['booking'] }}</strong> </p>
+            <p> <span>Cantidad de Pallets:</span> <strong>{{ formGroup2.value['cantPallets'] }}</strong> </p>
+            <p> <span>Hora de Carga:</span><strong> {{ formGroup2.value['horaCarga'] }}</strong> </p>
+
+            <p><span> Pre Enfriado:</span> <strong> {{ formGroup3.value['preEnfriado']   }} </strong></p>
             <p><span> Limpio y sin olores: </span> <strong> {{ formGroup3.value['limpio'] == true ? 'SI' : 'NO' }} </strong></p>
             <p><span> En buen estado:</span> <strong>  {{ formGroup3.value['buenEstado'] == true ? 'SI' : 'NO' }} </strong></p>
             <p> <span>Tipo de Carga: </span> <strong> {{ formGroup3.value['tipoCarga'] == true ? 'SI' : 'NO' }} </strong></p>
-            <p><span> Seteo de Contenedor:</span> <strong>  {{ formGroup3.value['seteContainer'] | uppercase }}</strong> </p>
-            <p><span> Ventilación (CBN):</span> <strong>  {{ formGroup3.value['ventilacion'] | uppercase }} </strong></p>
-            <p><span> Año de Container: </span> <strong> {{ formGroup3.value['anoContainer'] | uppercase }} </strong></p>
-            <p><span> PTI:</span>  <strong> {{ formGroup3.value['pti'] | date: 'dd/MM/yyyy' | uppercase }}</strong> </p>
+            <p><span> Seteo de Contenedor:</span> <strong>  {{ formGroup3.value['seteContainer']  }}</strong> </p>
+            <p><span> Ventilación (CBN):</span> <strong>  {{ formGroup3.value['ventilacion']  }} </strong></p>
+            <p><span> Año de Container: </span> <strong> {{ formGroup3.value['anoContainer']  }} </strong></p>
+            <p><span> PTI:</span>  <strong> {{ formGroup3.value['pti'] | date: 'dd/MM/yyyy'  }}</strong> </p>
             <p> Comnetarios:</p>
             <p>{{ formGroup4.value['coments'] }} </p>
 
