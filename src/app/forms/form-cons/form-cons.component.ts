@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import {MAT_STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
+import { FormService } from '../../form.service';
+import { Informe } from 'src/app/models/informe';
 
 // import {MatCheckbox } from '@angular/material/checkbox';
 
@@ -8,13 +10,39 @@ export interface Specie {
   value: string;
   viewValue: string;
 }
+// Datos ejempl
+const record =  { 'orden':  '47488393',
+      'planta': 'PLANATA info',
+      'cliente': 'Labtera',
+      'container': 'MMM8888881',
+      'motonave': 'motonave',
+      'inporter': 'Importer dato',
+      'portDest': 'Puerto Destino',
+      'portOrig': 'Puerto Origen',
+      'espices': 'Manzana',
+      'patenteCamion': '88patente',
+      'patenteCarro': '788carro patente',
+      'booking': 'bookeing 55',
+      'empresaTransporte': 'Empresa de Transporte',
+      'cantPallets': 89,
+      'horaCarga': '2018/12/02:55:48',
+      'nroSeteoContainer': 4444,
+      'nroBolsas': 89,
+      'limpio': true,
+      'preEnfriado': false,
+      'buenEstado': false,
+      'tipoCarga': 'tipo Carga dato',
+      'ventilacion': 33,
+      'coments': 'sds dasf ashd asfdas da oiasfa fa'
+    };
 
 @Component({
   selector: 'app-form-cons',
   templateUrl: './form-cons.component.html',
   styleUrls: ['./form-cons.component.scss'],
-  providers: [{
-    provide: MAT_STEPPER_GLOBAL_OPTIONS, useValue: {displayDefaultIndicatorType: false}
+  providers: [
+    FormService,// Agregado FormService ya que el servicio no esta funcioando (probando)
+    { provide:  MAT_STEPPER_GLOBAL_OPTIONS, useValue: {displayDefaultIndicatorType: false}
   }]
 })
 export class FormConsComponent implements OnInit {
@@ -29,9 +57,17 @@ export class FormConsComponent implements OnInit {
   isOptional = false;
   uploaded = false;
   selectedFile: File = null;
-  constructor(private _fb: FormBuilder) {}
   isValidForm = false;
   today = new Date();
+
+  constructor(private _fb: FormBuilder, private formService: FormService ) {}
+
+
+  // Usar el Array de form.Service como datos de ejemplo
+
+
+
+
   // specie = ['Uva', 'Pera', 'Frutilla', 'Manzana'];
   mySpecie: Specie[] = [
     {value: 'Uvas', viewValue: 'Uvas'},
@@ -79,31 +115,30 @@ puertoCarga: Specie[] = [
     this.formGroup2 = this._fb.group({
       // formDate: ['null', Validators.required],
       container: this._fb.group({
-        letras: ['', Validators.required],
-        numbers: ['', Validators.required],
-        caracter: ['', Validators.required]
+        letras: ['', ],
+        numbers: [ '', [Validators.min(0), Validators.max(99999999)] ] ,
+        caracter: ['', [Validators.min(0), Validators.max(9)]]
       }),
       motonave: '',
-      importer: '',
+      inporter: '',
       portDest: '',
       portOrig: '',
       espices: '',
       patenteCamion: '',
       patenteCarro: '',
       booking: '',
-      empresaTrasnporte: '',
-      cantPallets: '',
+      empresaTransporte: '',
+      cantPallets: ['', [Validators.min(0), Validators.max(99)]],
       horaCarga: '',
-      nroSeroContainer: '',
-      nroBolsas: ''
+      nroBolsas: ['', [Validators.min(0), Validators.max(999)]]
     });
     this.formGroup3 = this._fb.group({
       limpio: '',
       preEnfriado: '',
       buenEstado: '',
       tipoCarga: '',
-      seteoContainer: '',
-      ventilacion: '',
+      seteoContainer: ['', Validators.max(999)],
+      ventilacion: ['', Validators.max(99)],
       anoContainer: '',
       pti: ['' ],
       quest: ''
@@ -121,7 +156,48 @@ puertoCarga: Specie[] = [
     this.uploaded = true;
   }
   onClick(event) {
-    // console.log (event);
+    // console.log( this.formGroup1.value );
+    // console.log( this.formGroup2.value );
+    // console.log( this.formGroup3.value );
+    // console.log( this.formGroup4.value );
+
+    // Converitr todos los formualarios en uno solo
+    const datos = new Informe;
+    datos.cliente = 'Grow';
+    datos.orden = this.formGroup1.get('order').value;
+    datos.planta = this.formGroup1.get('planta').value;
+    datos.cliente = this.formGroup1.get('client').value;
+    datos.container = this.getContainer(); // Unir campos del container
+    datos.motonave = this.formGroup2.get('motonave').value;
+    datos.inporter = this.formGroup2.get('inporter').value;
+    datos.portDest = this.formGroup2.get('portDest').value;
+    datos.portOrig = this.formGroup2.get('portOrig').value;
+    datos.espices = this.formGroup2.get('espices').value;
+    datos.patenteCamion = this.formGroup2.get('patenteCamion').value;
+    datos.patenteCarro = this.formGroup2.get('patenteCarro').value;
+    datos.booking = this.formGroup2.get('booking').value;
+    datos.empresaTransporte = this.formGroup2.get('empresaTransporte').value;
+    datos.cantPallets = this.formGroup2.get('cantPallets').value;
+    datos.horaCarga = this.formGroup2.get('horaCarga').value;
+    datos.preEnfriado = this.formGroup3.get('preEnfriado').value ? true : false;
+    datos.nroBolsas = this.formGroup2.get('nroBolsas').value;
+    datos.limpio = (this.formGroup3.get('limpio').value) ? true : false;
+    datos.buenEstado = this.formGroup3.get('buenEstado').value ? true : false;
+    datos.tipoCarga = this.formGroup3.get('tipoCarga').value;
+    datos.seteoContainer = this.formGroup3.get('seteoContainer').value;
+    datos.ventilacion = this.formGroup3.get('ventilacion').value;
+    // datos.anoContainer = this.formGroup3.get('anoContainer').value;
+    datos.pti = this.formGroup3.get('pti').value;
+    datos.quest = this.formGroup3.get('quest').value;
+    datos.coments = this.formGroup4.get('coments').value;
+
+
+    // console.log(datos);
+    this.formService.postInforme(datos)
+      .subscribe(res => {
+        console.log(res);
+      });
+
 
   }
 

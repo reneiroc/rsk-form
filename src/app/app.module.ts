@@ -24,6 +24,7 @@ import { FormService } from './form.service';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,7 +49,8 @@ import { FormService } from './form.service';
     MatDividerModule,
     HttpClientModule,
     MatCheckboxModule,
-    MatSelectModule
+    MatSelectModule,
+    HttpClientModule
 
   ],
 
