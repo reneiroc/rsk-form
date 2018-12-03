@@ -12,7 +12,8 @@ import {MatButtonModule,
   MatGridListModule,
   MatDividerModule,
   MatCheckboxModule,
-  MatSelectModule
+  MatSelectModule,
+
   } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -50,7 +51,8 @@ import { FormService } from './form.service';
     HttpClientModule,
     MatCheckboxModule,
     MatSelectModule,
-    HttpClientModule
+    HttpClientModule,
+
 
   ],
 

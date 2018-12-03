@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import {MAT_STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
+
 import { FormService } from '../../form.service';
 import { Informe } from 'src/app/models/informe';
 
@@ -59,8 +60,10 @@ export class FormConsComponent implements OnInit {
   selectedFile: File = null;
   isValidForm = false;
   today = new Date();
+  enviado = false;
+  constructor(private _fb: FormBuilder, private formService: FormService) {}
 
-  constructor(private _fb: FormBuilder, private formService: FormService ) {}
+
 
 
   // Usar el Array de form.Service como datos de ejemplo
@@ -84,6 +87,7 @@ export class FormConsComponent implements OnInit {
 a = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima iusto saepe nesciunt non';
 b =  'ex itaque illum optio fugit, enim odit voluptate officiis voluptatum, similique est. Maiores dolor porro tenetur mollitia.';
 comments = this.a.concat(this.b);
+
 
 puertoCarga: Specie[] = [
   {value: 'Arica', viewValue: 'Arica'},
@@ -194,8 +198,8 @@ puertoCarga: Specie[] = [
 
     // console.log(datos);
     this.formService.postInforme(datos)
-      .subscribe(res => {
-        console.log(res);
+      .subscribe(res => {console.log(res);
+        this.enviado = true;
       });
 
 
