@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import {MAT_STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
-
+import { HttpClient } from '@angular/common/http';
 import { FormService } from '../../form.service';
 import { Informe } from 'src/app/models/informe';
+
+const uploadUrl = 'http://localhost:3000/api/informe/uploader'; // para definir servidor de upload
 
 // import {MatCheckbox } from '@angular/material/checkbox';
 
@@ -42,11 +44,12 @@ const record =  { 'orden':  '47488393',
   templateUrl: './form-cons.component.html',
   styleUrls: ['./form-cons.component.scss'],
   providers: [
-    FormService,// Agregado FormService ya que el servicio no esta funcioando (probando)
+    FormService, // Agregado FormService ya que el servicio no esta funcioando (probando)
     { provide:  MAT_STEPPER_GLOBAL_OPTIONS, useValue: {displayDefaultIndicatorType: false}
   }]
 })
 export class FormConsComponent implements OnInit {
+
   formGroup1: FormGroup;
   formGroup2: FormGroup;
   formGroup3: FormGroup;
@@ -61,16 +64,11 @@ export class FormConsComponent implements OnInit {
   isValidForm = false;
   today = new Date();
   enviado = false;
-  constructor(private _fb: FormBuilder, private formService: FormService) {}
-
-
+  selected = false;
+  constructor(private _fb: FormBuilder, private formService: FormService, private http: HttpClient) {}
 
 
   // Usar el Array de form.Service como datos de ejemplo
-
-
-
-
   // specie = ['Uva', 'Pera', 'Frutilla', 'Manzana'];
   mySpecie: Specie[] = [
     {value: 'Uvas', viewValue: 'Uvas'},
@@ -152,13 +150,54 @@ puertoCarga: Specie[] = [
       coments: 'Lorem ipsum, dolor sit amet consectetur'
     });
     this.formGroup4.controls['coments'].setValue(this.comments);
-  }
-  onFileChange(event) {
-    console.log (event);
-    this.selectedFile = event.target.files[0];
+
+
+  }// end Oninit
+
+  // Para subida de archivos
+  onFileSelected(event) {
+    this.selectedFile = null;
+    this.selectedFile = <File> event.target.files[0];
     this.fileName = this.selectedFile.name;
-    this.uploaded = true;
+    console.log(this.selectedFile.name);
+    this.selected = true;
+    // this.onUpload();
   }
+
+
+onUpload(event) {
+    const fd = new FormData();
+    console.log('Archivo es');
+    console.log(this.selectedFile);
+    // fd.append('informe', this.selectedFile, 'informe.jpg');
+    console.log('nombre es:');
+    console.log(this.selectedFile.name);
+    fd.append('informe', this.selectedFile, this.selectedFile.name);
+    // this.http.post(url, fd, { headers: {'Content-Type': 'multipart/form-data'}})
+    this.http.post(uploadUrl, fd)
+    .subscribe( res => {
+      console.log(res);
+      this.uploaded = true;
+
+    });
+
+  }
+// Workign with maximilian
+  // onFileChange(event) {
+  //   console.log (event);
+  //   this.selectedFile = event.target.files[0];
+  //   this.fileName = this.selectedFile.name;
+  //   this.uploaded = true;
+  // }
+
+
+  // onFileChange(event) {
+
+  //   console.log (event);
+  //   this.selectedFile = event.target.files[0];
+  //   // this.fileName = this.selectedFile.name;
+  //   // this.uploaded = true;
+  // }
   onClick(event) {
     // console.log( this.formGroup1.value );
     // console.log( this.formGroup2.value );

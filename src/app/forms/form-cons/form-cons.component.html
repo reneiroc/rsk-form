@@ -1,6 +1,9 @@
 
 <!-- <mat-card> -->
-  <mat-horizontal-stepper linear [hidden]= '!enviado ? false : true'>
+  <!-- Habilitado para ocultar el form -->
+  <!-- <mat-horizontal-stepper linear [hidden]= '!enviado ? false : true'> -->
+
+  <mat-horizontal-stepper linear >
     <!-- ******************  FORMULARIO 1 ************************-->
     <!-- *                                                       *-->
     <!-- ******************  FORMULARIO 1 ************************-->
@@ -252,21 +255,29 @@
     <!-- ******************************************* -->
     <!-- **            CARGA DE FOTOS            *** -->
     <!-- ******************************************* -->
-    <!-- <mat-step>
+    <mat-step>
       <mat-card>
           <mat-card-header>
               <mat-card-subtitle>FOTOS DE CONSOLIDACION DE CARGA</mat-card-subtitle>
             </mat-card-header>
-        <mat-grid-list cols="2" rowHeight="2:2">
-          <mat-grid-tile (click)= "fileInput.click($event)" [style.background-color]= "uploaded ? 'skyblue': ''" >
 
-              <span> {{ uploaded?  fileName : 'Tipo Consolidad' }}</span>
-                <input style= "display: none;"
-                 accept="image/x-png,image/gif,image/jpeg"
-                 #fileInput
-                 type="file"
-                 (change)="onFileChange($event)" />
+        <mat-grid-list cols="2" rowHeight="2:2">
+          <!-- <mat-grid-tile (click)= "fileInput.click($event)" [style.background-color]= "uploaded ? 'skyblue': ''" > -->
+            <mat-grid-tile  [style.background-color]= "uploaded ? 'skyblue': ''" >
+
+              <!-- <span> {{ uploaded?  fileName : 'Tipo Consolidad' }}</span> -->
+              <input style="display: none"
+              accept="image/x-png,image/gif,image/jpeg"
+              type="file"
+              #fileInput
+              name="informe"
+              (change)="onFileSelected($event)" />
+
+              <button type="button" (click)="fileInput.click()">Tomar Foto </button>
+              <button [hidden]="!selected" type="button" (click)="onUpload()"class="btn btn-success btn-s">Upload </button>
+              <div >{{ fileName }} </div>
             </mat-grid-tile>
+
 
             <mat-grid-tile>Patente de Cambión
             </mat-grid-tile>
@@ -286,7 +297,7 @@
             <button class="bt-right" mat-raised-button mat-button matStepperNext color="primary">Siguiente</button>
         </mat-card-footer>
       </mat-card>
-    </mat-step> -->
+    </mat-step>
 
     <!-- ******************************************* -->
     <!-- **            COMENTARIOS               *** -->
@@ -348,7 +359,8 @@
 
           </mat-card-content>
           <mat-card-footer>
-            <button (click)="onClick($event)" [disabled]= 'isValidForm ? false : true'  style="margin: 20px;" mat-raised-button mat-button color="primary">Enviar</button>
+            <!-- <button (click)="onClick($event)" [disabled]= 'isValidForm ? false : true'  style="margin: 20px;" mat-raised-button mat-button color="primary">Enviar</button> -->
+            <button (click)="onClick($event)"   style="margin: 20px;" mat-raised-button mat-button color="primary">Enviar</button>
           </mat-card-footer>
         </mat-card>
       </mat-step>

@@ -1,0 +1,13 @@
+<p>
+  uploader works!
+</p>
+
+<input type="file" name="informe"
+  (change) = "onFileSelected($event)" />
+
+<button [hidden] = "!selected" type="button" class="btn btn-success btn-s"
+ (click)="onUpload()">
+ <!-- [disabled]="!uploader.getNotUploadedItems().length" > -->
+     Upload an Image
+</button>
+
