@@ -1,13 +1,15 @@
-<p>
-  uploader works!
-</p>
 
-<input type="file" name="informe"
-  (change) = "onFileSelected($event)" />
+  <input style="display: none"
+  accept="image/x-png,image/gif,image/jpeg"
+  type="file"
+  #fileInput
+  name="informe"
+  (change)="onFileSelected($event)" />
 
-<button [hidden] = "!selected" type="button" class="btn btn-success btn-s"
- (click)="onUpload()">
- <!-- [disabled]="!uploader.getNotUploadedItems().length" > -->
-     Upload an Image
-</button>
+  <button type="button" (click)="fileInput.click()">Tomar Foto </button>
+  <button [hidden]="!selected" type="button" (click)="onUpload()"class="btn btn-success btn-s">Upload </button>
+  <div >{{ fileName }} </div>
+
+
+
 

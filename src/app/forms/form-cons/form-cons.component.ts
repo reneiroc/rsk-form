@@ -49,7 +49,7 @@ const record =  { 'orden':  '47488393',
   }]
 })
 export class FormConsComponent implements OnInit {
-
+  fileNames = Array(); // Para almacenar nombre de archivos subidos
   formGroup1: FormGroup;
   formGroup2: FormGroup;
   formGroup3: FormGroup;
@@ -101,7 +101,7 @@ puertoCarga: Specie[] = [
   esp = ['Uva', 'Pera', 'Fresa'];
 
   ngOnInit() {
-
+    this.fileNames = new Array; // Inicialiazar array en cero valores
 
     this.formGroup1 = this._fb.group({
       fecha: this.today.toLocaleString('en-GB'),
@@ -158,8 +158,11 @@ puertoCarga: Specie[] = [
   onFileSelected(event) {
     this.selectedFile = null;
     this.selectedFile = <File> event.target.files[0];
-    this.fileName = this.selectedFile.name;
+    // this.fileName = this.selectedFile.name;
+
     console.log(this.selectedFile.name);
+    console.log(this.selectedFile.name);
+
     this.selected = true;
     // this.onUpload();
   }
@@ -176,9 +179,10 @@ onUpload(event) {
     // this.http.post(url, fd, { headers: {'Content-Type': 'multipart/form-data'}})
     this.http.post(uploadUrl, fd)
     .subscribe( res => {
-      console.log(res);
-      this.uploaded = true;
-
+      const data = <any> res;
+      this.uploaded = data.creado;
+      this.fileNames.push( data.name);
+      console.log(this.fileNames);
     });
 
   }

@@ -37,6 +37,8 @@ export class FormService {
 
   registo = record;
   informe: Informe;
+  private filesNames = new Array();
+
   // readonly URL_API = 'http://35.211.175.246/node/api/informe';
   readonly URL_API = 'http://localhost:3000/api/informe';
   constructor(private http: HttpClient) {}
@@ -51,5 +53,13 @@ export class FormService {
   }
   getInfome() {
     return this.http.get(this.URL_API);
+  }
+
+
+  getFilesNames() {// Retorn nombres de archivos cargados
+    return this.filesNames;
+  }
+  pushFilesNames(name: string) {// Agrego nombres de archivos al array
+    return this.filesNames.push(name);
   }
 }

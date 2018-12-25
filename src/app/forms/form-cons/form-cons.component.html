@@ -263,33 +263,38 @@
 
         <mat-grid-list cols="2" rowHeight="2:2">
           <!-- <mat-grid-tile (click)= "fileInput.click($event)" [style.background-color]= "uploaded ? 'skyblue': ''" > -->
-            <mat-grid-tile  [style.background-color]= "uploaded ? 'skyblue': ''" >
-
-              <!-- <span> {{ uploaded?  fileName : 'Tipo Consolidad' }}</span> -->
-              <input style="display: none"
-              accept="image/x-png,image/gif,image/jpeg"
-              type="file"
-              #fileInput
-              name="informe"
-              (change)="onFileSelected($event)" />
-
-              <button type="button" (click)="fileInput.click()">Tomar Foto </button>
-              <button [hidden]="!selected" type="button" (click)="onUpload()"class="btn btn-success btn-s">Upload </button>
-              <div >{{ fileName }} </div>
+          <!-- <mat-grid-tile  [style.background-color]= "uploaded ? 'skyblue': ''" > -->
+            <mat-grid-tile >
+              <div>
+                <div>Encendido Termografo1 </div>
+                <app-uploader></app-uploader>
+              </div>
+            </mat-grid-tile>
+            <mat-grid-tile>
+              <div>
+                <div> Patente de Cambión </div>
+                  <app-uploader></app-uploader>
+              </div>
             </mat-grid-tile>
 
-
-            <mat-grid-tile>Patente de Cambión
+            <mat-grid-tile >
+              <div>
+                <div>Patente de Carro</div>
+                <app-uploader></app-uploader>
+              </div>
             </mat-grid-tile>
-
-            <mat-grid-tile>Patente de Carro</mat-grid-tile>
-            <mat-grid-tile>Seteo de Contenedor</mat-grid-tile>
-            <mat-grid-tile>Lampa de Contenedor</mat-grid-tile>
+            <mat-grid-tile>
+              <div>
+                <div>Seteo de Contenedor</div>
+                <app-uploader></app-uploader>
+              </div>
+            </mat-grid-tile>
+            <!-- <mat-grid-tile>Lampa de Contenedor</mat-grid-tile>
             <mat-grid-tile>Detalle de Contenedor</mat-grid-tile>
             <mat-grid-tile>Cartones Inicio de Carga</mat-grid-tile>
             <mat-grid-tile>Encendido Termografo1</mat-grid-tile>
             <mat-grid-tile>Encendido Termografo2</mat-grid-tile>
-            <mat-grid-tile>Nro. Termografos</mat-grid-tile>
+            <mat-grid-tile>Nro. Termografos</mat-grid-tile> -->
             <mat-divider></mat-divider>
         </mat-grid-list>
         <mat-card-footer>
