@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FileSelectDirective } from 'ng2-file-upload'; // Usando otro tutorial
+
 import {MatButtonModule,
   MatInputModule,
   MatFormFieldModule,
@@ -33,7 +33,6 @@ import { UploaderComponent } from './forms/uploader/uploader.component';
     AppComponent,
     FormConsComponent,
     HeaderComponent,
-    FileSelectDirective,
     UploaderComponent
 
   ],

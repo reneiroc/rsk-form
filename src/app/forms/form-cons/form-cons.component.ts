@@ -5,7 +5,8 @@ import { HttpClient } from '@angular/common/http';
 import { FormService } from '../../form.service';
 import { Informe } from 'src/app/models/informe';
 
-const uploadUrl = 'http://localhost:3000/api/informe/uploader'; // para definir servidor de upload
+// const uploadUrl = 'http://localhost:3000/api/informe/uploader'; // para definir servidor de upload
+const uploadUrl = 'http://35.211.175.246/node/api/informe/uploader'; // para definir servidor de upload
 
 // import {MatCheckbox } from '@angular/material/checkbox';
 
@@ -155,37 +156,39 @@ puertoCarga: Specie[] = [
   }// end Oninit
 
   // Para subida de archivos
-  onFileSelected(event) {
-    this.selectedFile = null;
-    this.selectedFile = <File> event.target.files[0];
-    // this.fileName = this.selectedFile.name;
 
-    console.log(this.selectedFile.name);
-    console.log(this.selectedFile.name);
+  // onFileSelected(event) {
+  //   this.selectedFile = null;
+  //   this.selectedFile = <File> event.target.files[0];
+  //   // this.fileName = this.selectedFile.name;
 
-    this.selected = true;
-    // this.onUpload();
-  }
+  //   console.log(this.selectedFile.name);
+  //   console.log(this.selectedFile.name);
+
+  //   this.selected = true;
+  //   // this.onUpload();
+  // }
 
 
-onUpload(event) {
-    const fd = new FormData();
-    console.log('Archivo es');
-    console.log(this.selectedFile);
-    // fd.append('informe', this.selectedFile, 'informe.jpg');
-    console.log('nombre es:');
-    console.log(this.selectedFile.name);
-    fd.append('informe', this.selectedFile, this.selectedFile.name);
-    // this.http.post(url, fd, { headers: {'Content-Type': 'multipart/form-data'}})
-    this.http.post(uploadUrl, fd)
-    .subscribe( res => {
-      const data = <any> res;
-      this.uploaded = data.creado;
-      this.fileNames.push( data.name);
-      console.log(this.fileNames);
-    });
+// onUpload(event) {
+//     const fd = new FormData();
+//     console.log('Archivo es');
+//     console.log(this.selectedFile);
+//     // fd.append('informe', this.selectedFile, 'informe.jpg');
+//     console.log('nombre es:');
+//     console.log(this.selectedFile.name);
+//     fd.append('informe', this.selectedFile, this.selectedFile.name);
+//     // this.http.post(url, fd, { headers: {'Content-Type': 'multipart/form-data'}})
+//     this.http.post(uploadUrl, fd)
+//     .subscribe( res => {
+//       const data = <any> res;
+//       this.uploaded = data.creado;
+//       this.fileNames.push( data.name);
+//       console.log(this.fileNames);
+//     });
 
-  }
+//   }
+
 // Workign with maximilian
   // onFileChange(event) {
   //   console.log (event);

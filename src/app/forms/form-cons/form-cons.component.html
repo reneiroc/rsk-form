@@ -1,9 +1,9 @@
 
 <!-- <mat-card> -->
   <!-- Habilitado para ocultar el form -->
-  <!-- <mat-horizontal-stepper linear [hidden]= '!enviado ? false : true'> -->
+  <mat-horizontal-stepper linear [hidden]= '!enviado ? false : true'>
 
-  <mat-horizontal-stepper linear >
+  <!-- <mat-horizontal-stepper linear > -->
     <!-- ******************  FORMULARIO 1 ************************-->
     <!-- *                                                       *-->
     <!-- ******************  FORMULARIO 1 ************************-->
@@ -364,8 +364,8 @@
 
           </mat-card-content>
           <mat-card-footer>
-            <!-- <button (click)="onClick($event)" [disabled]= 'isValidForm ? false : true'  style="margin: 20px;" mat-raised-button mat-button color="primary">Enviar</button> -->
-            <button (click)="onClick($event)"   style="margin: 20px;" mat-raised-button mat-button color="primary">Enviar</button>
+            <button (click)="onClick($event)" [disabled]= 'isValidForm ? false : true'  style="margin: 20px;" mat-raised-button mat-button color="primary">Enviar</button>
+            <!-- <button (click)="onClick($event)"   style="margin: 20px;" mat-raised-button mat-button color="primary">Enviar</button> -->
           </mat-card-footer>
         </mat-card>
       </mat-step>
