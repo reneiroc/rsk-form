@@ -5,8 +5,10 @@ import { HttpClient } from '@angular/common/http';
 import { FormService } from '../../form.service';
 import { Informe } from 'src/app/models/informe';
 
-// const uploadUrl = 'http://localhost:3000/api/informe/uploader'; // para definir servidor de upload
-const uploadUrl = 'http://35.211.175.246/node/api/informe/uploader'; // para definir servidor de upload
+
+
+const uploadUrl = 'http://localhost:3000/api/informe/uploader'; // para definir servidor de upload
+// const uploadUrl = 'http://35.211.175.246/node/api/informe/uploader'; // para definir servidor de upload
 
 // import {MatCheckbox } from '@angular/material/checkbox';
 
@@ -14,6 +16,9 @@ export interface Specie {
   value: string;
   viewValue: string;
 }
+
+
+
 // Datos ejempl
 const record =  { 'orden':  '47488393',
       'planta': 'PLANATA info',
@@ -28,10 +33,10 @@ const record =  { 'orden':  '47488393',
       'patenteCarro': '788carro patente',
       'booking': 'bookeing 55',
       'empresaTransporte': 'Empresa de Transporte',
-      'cantPallets': 89,
+      'cantPallets': 89, // Revisar CANT APles ya que debe ser puros numeros
       'horaCarga': '2018/12/02:55:48',
       'nroSeteoContainer': 4444,
-      'nroBolsas': 89,
+      'cantCajas': 89,
       'limpio': true,
       'preEnfriado': false,
       'buenEstado': false,
@@ -49,12 +54,17 @@ const record =  { 'orden':  '47488393',
     { provide:  MAT_STEPPER_GLOBAL_OPTIONS, useValue: {displayDefaultIndicatorType: false}
   }]
 })
+
+
+
+
 export class FormConsComponent implements OnInit {
   fileNames = Array(); // Para almacenar nombre de archivos subidos
   formGroup1: FormGroup;
   formGroup2: FormGroup;
   formGroup3: FormGroup;
   formGroup4: FormGroup;
+  formGroup5: FormGroup; // Para pellets Stibas
   container: '';
   fomrGroupContainer: FormGroup;
   fileUrl:  'http://rcwebmaster.com/images/avatars/cliente_2.jpg';
@@ -63,10 +73,12 @@ export class FormConsComponent implements OnInit {
   uploaded = false;
   selectedFile: File = null;
   isValidForm = false;
+
+  isAdmosferaControlada = true;
   today = new Date();
   enviado = false;
   selected = false;
-  constructor(private _fb: FormBuilder, private formService: FormService, private http: HttpClient) {}
+  constructor(private _fb: FormBuilder, private formService: FormService, private http: HttpClient) { }
 
 
   // Usar el Array de form.Service como datos de ejemplo
@@ -119,7 +131,7 @@ puertoCarga: Specie[] = [
       // formDate: ['null', Validators.required],
       container: this._fb.group({
         letras: ['', ],
-        numbers: [ '', [Validators.min(0), Validators.max(99999999)] ] ,
+        numbers: [ '', [Validators.min(0), Validators.max(999999)] ] ,
         caracter: ['', [Validators.min(0), Validators.max(9)]]
       }),
       motonave: '',
@@ -133,7 +145,15 @@ puertoCarga: Specie[] = [
       empresaTransporte: '',
       cantPallets: ['', [Validators.min(0), Validators.max(99)]],
       horaCarga: '',
-      nroBolsas: ['', [Validators.min(0), Validators.max(999)]]
+      termoPallets1: this._fb.group({
+        termografo: '',
+        termografoPallet: '',
+      }),
+      termoPallets2: this._fb.group({
+        termografo: '',
+        termografoPallet: '',
+      }),
+      cantCajas: ['', [Validators.min(0), Validators.max(9999)]]
     });
     this.formGroup3 = this._fb.group({
       limpio: '',
@@ -143,15 +163,101 @@ puertoCarga: Specie[] = [
       seteoContainer: ['', Validators.max(999)],
       ventilacion: ['', Validators.max(99)],
       anoContainer: '',
-      pti: ['' ],
-      quest: ''
-
+      pti: '',
+      quest: '',
+      admosfera: this._fb.group({
+        numero:  ['', [Validators.min(0), Validators.max(99)]],
+        porcentaje:  ['', [Validators.min(-80), Validators.max(99)]],
+      })
     });
     this.formGroup4 = this._fb.group({
       coments: 'Lorem ipsum, dolor sit amet consectetur'
     });
     this.formGroup4.controls['coments'].setValue(this.comments);
 
+    this.formGroup5 = this._fb.group({
+      a1: this._fb.group({
+        cod: '',
+        temp: Number
+      }),
+      a2: this._fb.group({
+        cod: '',
+        temp: Number
+      }),
+      a3: this._fb.group({
+        cod: '',
+        temp: Number
+      }),
+      a4: this._fb.group({
+        cod: '',
+        temp: Number
+      }),
+      a5: this._fb.group({
+        cod: '',
+        temp: Number
+      }),
+      a6: this._fb.group({
+        cod: '',
+        temp: Number
+      }),
+      a7: this._fb.group({
+        cod: '',
+        temp: Number
+      }),
+      a8: this._fb.group({
+        cod: '',
+        temp: Number
+      }),
+      a9: this._fb.group({
+        cod: '',
+        temp: Number
+      }),
+      a10: this._fb.group({
+        cod: '',
+        temp: Number
+      }),
+      b1: this._fb.group({
+        cod: '',
+        temp: Number
+      }),
+      b2: this._fb.group({
+        cod: '',
+        temp: Number
+      }),
+      b3: this._fb.group({
+        cod: '',
+        temp: Number
+      }),
+      b4: this._fb.group({
+        cod: '',
+        temp: Number
+      }),
+      b5: this._fb.group({
+        cod: '',
+        temp: Number
+      }),
+      b6: this._fb.group({
+        cod: '',
+        temp: Number
+      }),
+      b7: this._fb.group({
+        cod: '',
+        temp: Number
+      }),
+      b8: this._fb.group({
+        cod: '',
+        temp: Number
+      }),
+      b9: this._fb.group({
+        cod: '',
+        temp: Number
+      }),
+      b10: this._fb.group({
+        cod: '',
+        temp: Number
+      }),
+
+    });
 
   }// end Oninit
 
@@ -205,6 +311,12 @@ puertoCarga: Specie[] = [
   //   // this.fileName = this.selectedFile.name;
   //   // this.uploaded = true;
   // }
+
+  onChangeAdmosfera(event) {
+    this.isAdmosferaControlada = ! this.isAdmosferaControlada;
+  }
+
+
   onClick(event) {
     // console.log( this.formGroup1.value );
     // console.log( this.formGroup2.value );
@@ -216,7 +328,7 @@ puertoCarga: Specie[] = [
     datos.cliente = 'Grow';
     datos.orden = this.formGroup1.get('order').value;
     datos.planta = this.formGroup1.get('planta').value;
-    datos.cliente = this.formGroup1.get('client').value;
+    // datos.cliente = this.formGroup1.get('client').value;
     datos.container = this.getContainer(); // Unir campos del container
     datos.motonave = this.formGroup2.get('motonave').value;
     datos.inporter = this.formGroup2.get('inporter').value;
@@ -229,8 +341,12 @@ puertoCarga: Specie[] = [
     datos.empresaTransporte = this.formGroup2.get('empresaTransporte').value;
     datos.cantPallets = this.formGroup2.get('cantPallets').value;
     datos.horaCarga = this.formGroup2.get('horaCarga').value;
+    datos.termografo1 = this.formGroup2.get('termoPallets1.termografo').value;
+    datos.termografo2 = this.formGroup2.get('termoPallets2.termografo').value;
+    datos.termografoPallet1 = this.formGroup2.get('termoPallets1.termografoPallet').value;
+    datos.termografoPallet2 = this.formGroup2.get('termoPallets2.termografoPallet').value;
     datos.preEnfriado = this.formGroup3.get('preEnfriado').value ? true : false;
-    datos.nroBolsas = this.formGroup2.get('nroBolsas').value;
+    datos.cantCajas = this.formGroup2.get('cantCajas').value;
     datos.limpio = (this.formGroup3.get('limpio').value) ? true : false;
     datos.buenEstado = this.formGroup3.get('buenEstado').value ? true : false;
     datos.tipoCarga = this.formGroup3.get('tipoCarga').value;
@@ -238,10 +354,32 @@ puertoCarga: Specie[] = [
     datos.ventilacion = this.formGroup3.get('ventilacion').value;
     // datos.anoContainer = this.formGroup3.get('anoContainer').value;
     datos.pti = this.formGroup3.get('pti').value;
-    datos.quest = this.formGroup3.get('quest').value;
+    datos.quest = this.formGroup3.get('quest').value ? true : false;
     datos.coments = this.formGroup4.get('coments').value;
+    datos.admosferaNumero = this.formGroup3.get('admosfera.numero').value;
+    datos.admosferaPorcentaje = this.formGroup3.get('admosfera.porcentaje').value;
+    datos.a1 = this.formGroup5.get('a1.cod').value; datos.ta1 = this.formGroup5.get('a1.temp').value;
+    datos.a2 = this.formGroup5.get('a2.cod').value; datos.ta2 = this.formGroup5.get('a2.temp').value;
+    datos.a3 = this.formGroup5.get('a3.cod').value; datos.ta3 = this.formGroup5.get('a3.temp').value;
+    datos.a4 = this.formGroup5.get('a4.cod').value; datos.ta4 = this.formGroup5.get('a4.temp').value;
+    datos.a5 = this.formGroup5.get('a5.cod').value; datos.ta5 = this.formGroup5.get('a5.temp').value;
+    datos.a6 = this.formGroup5.get('a6.cod').value; datos.ta6 = this.formGroup5.get('a6.temp').value;
+    datos.a7 = this.formGroup5.get('a7.cod').value; datos.ta7 = this.formGroup5.get('a7.temp').value;
+    datos.a8 = this.formGroup5.get('a8.cod').value; datos.ta8 = this.formGroup5.get('a8.temp').value;
+    datos.a9 = this.formGroup5.get('a9.cod').value; datos.ta9 = this.formGroup5.get('a9.temp').value;
+    datos.a10 = this.formGroup5.get('a10.cod').value; datos.ta10 = this.formGroup5.get('a10.temp').value;
 
-
+    datos.b1 = this.formGroup5.get('b1.cod').value; datos.tb1 = this.formGroup5.get('b1.temp').value;
+    datos.b2 = this.formGroup5.get('b2.cod').value; datos.tb2 = this.formGroup5.get('b2.temp').value;
+    datos.b3 = this.formGroup5.get('b3.cod').value; datos.tb3 = this.formGroup5.get('b3.temp').value;
+    datos.b4 = this.formGroup5.get('b4.cod').value; datos.tb4 = this.formGroup5.get('b4.temp').value;
+    datos.b5 = this.formGroup5.get('b5.cod').value; datos.tb5 = this.formGroup5.get('b5.temp').value;
+    datos.b6 = this.formGroup5.get('b6.cod').value; datos.tb6 = this.formGroup5.get('b6.temp').value;
+    datos.b7 = this.formGroup5.get('b7.cod').value; datos.tb7 = this.formGroup5.get('b7.temp').value;
+    datos.b8 = this.formGroup5.get('b8.cod').value; datos.tb8 = this.formGroup5.get('b8.temp').value;
+    datos.b9 = this.formGroup5.get('b9.cod').value; datos.tb9 = this.formGroup5.get('b9.temp').value;
+    datos.b10 = this.formGroup5.get('b10.cod').value; datos.tb10 = this.formGroup5.get('b10.temp').value;
+console.log(datos);
     // console.log(datos);
     this.formService.postInforme(datos)
       .subscribe(res => {console.log(res);
@@ -260,4 +398,7 @@ puertoCarga: Specie[] = [
     const c = this.formGroup2.get('container.caracter').value;
     return a.toUpperCase()  + b + c;
   }
+
+
+
 }

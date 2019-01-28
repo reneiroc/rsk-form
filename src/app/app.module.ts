@@ -1,6 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxUpperCaseDirectiveModule, NgxUpperCaseDirective } from 'ngx-upper-case-directive';
+
+// Import ngx-barcode module
+// import { NgxBarcodeModule } from 'ngx-barcode';
 
 import {MatButtonModule,
   MatInputModule,
@@ -14,7 +18,7 @@ import {MatButtonModule,
   MatDividerModule,
   MatCheckboxModule,
   MatSelectModule,
-
+  MatTabsModule,
   } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -55,6 +59,9 @@ import { UploaderComponent } from './forms/uploader/uploader.component';
     MatCheckboxModule,
     MatSelectModule,
     HttpClientModule,
+    NgxUpperCaseDirectiveModule,
+    MatTabsModule,
+    // NgxBarcodeModule // No esta funcionando
 
 
   ],

@@ -1,9 +1,12 @@
 
 <!-- <mat-card> -->
   <!-- Habilitado para ocultar el form -->
-  <mat-horizontal-stepper linear [hidden]= '!enviado ? false : true'>
 
-  <!-- <mat-horizontal-stepper linear > -->
+
+
+  <!-- <mat-horizontal-stepper linear [hidden]= '!enviado ? false : true'> -->
+
+  <mat-horizontal-stepper linear >
     <!-- ******************  FORMULARIO 1 ************************-->
     <!-- *                                                       *-->
     <!-- ******************  FORMULARIO 1 ************************-->
@@ -21,18 +24,18 @@
                 </mat-form-field>
                   <mat-form-field>
                     <mat-label>Cliente</mat-label>
-                    <input  matInput formControlName="client" >
+                    <input  matInput formControlName="client" upperCase>
                   </mat-form-field>
               <div class="col-lg-4 col-sm-12">
                 <mat-form-field>
                   <mat-label>Planta</mat-label>
-                  <input matInput placeholder="Planta" formControlName="planta" maxlength="50" required>
+                  <input matInput placeholder="Planta" formControlName="planta" maxlength="50" required upperCase >
                 </mat-form-field>
               </div>
               <div class="col-lg-4 col-sm-12">
                 <mat-form-field>
                   <mat-label>Orden de Embarque</mat-label>
-                  <input matInput  placeholder="Orden de Embarque" formControlName="order" maxlength="50" required>
+                  <input matInput  placeholder="Orden de Embarque" formControlName="order" maxlength="50" required upperCase>
                 </mat-form-field>
 
               </div>
@@ -59,6 +62,9 @@
       <mat-card-header>
         <mat-card-subtitle>IDENTIFICACIÓN DE CARGA</mat-card-subtitle>
       </mat-card-header>
+
+
+
       <form [formGroup]="formGroup2">
         <!-- <section class="example-section"> -->
           <!-- <mat-form-field >
@@ -74,20 +80,16 @@
             <div formGroupName="container">
                 <mat-form-field style= "width: 100px;">
                   <mat-label>Container</mat-label>
-                  <input matInput type="text" #input maxlength="4" placeholder=" XXXX" formControlName="letras" required>
-
+                  <input matInput type="text" #input maxlength="4" placeholder=" XXXX" formControlName="letras" required upperCase>
                   <mat-hint align="end">{{input.value?.length || 0}}/4</mat-hint>
                 </mat-form-field>
                 <mat-form-field style= "width: 100px;">
-                  <!-- <input  atInput placeholder="(0-9)" formControlName="numbers" required> -->
-                  <!-- <input  type="tel" matInput placeholder="(0-9)" formControlName="numbers" required> -->
-                  <input  type="number"matInput placeholder="(0-9)" formControlName="numbers" required>
-
+                  <input #inputNum type="number"matInput placeholder="(999999)" formControlName="numbers" required>
+                  <mat-hint align="end">{{ inputNum.value.toString()?.length || 0 }}/6</mat-hint>
                 </mat-form-field>
                 <mat-form-field style= "width: 50px;">
-                  <!-- <input  minlength = "1" maxlength="1" matInput placeholder="(0-9)" formControlName="caracter" required> -->
-                  <input  type="number"  matInput placeholder="(0-9)" formControlName="caracter" required>
-
+                  <input #inputDigit type="number"  matInput placeholder="(99)" formControlName="caracter" required>
+                  <mat-hint align="end">{{ inputDigit.value.toString()?.length || 0 }}/1</mat-hint>
                 </mat-form-field>
             </div>
             <!-- <mat-form-field>
@@ -97,67 +99,94 @@
             <input  type = "number" matInput placeholder=" Caracter" formControlName="caracter"> -->
           <mat-form-field  >
             <mat-label>Motonave</mat-label>
-            <input matInput placeholder="Motonave" maxlength="40" formControlName="motonave">
+            <input matInput placeholder="Motonave" maxlength="40" formControlName="motonave" required upperCase>
             <!-- <mat-hint align="end">{{ x.vaue / 5}}</mat-hint> -->
 
           </mat-form-field>
         <!-- </section> -->
         <mat-form-field>
           <mat-label>Importador/Recibidor</mat-label>
-          <input matInput placeholder="Importador" formControlName="inporter">
+          <input matInput placeholder="Importador" formControlName="inporter" aria-required="true" required upperCase>
         </mat-form-field>
         <mat-form-field >
           <mat-label>Puerto de Carga</mat-label>
 
-          <mat-select formControlName="portOrig" placeholder="Puerto de Carga">
+          <mat-select formControlName="portOrig" placeholder="Puerto de Carga" aria-required="true" required upperCase>
             <mat-option *ngFor="let e of puertoCarga" [value]= 'e.value'>
-              {{ e.viewValue }}
+              {{ e.viewValue | uppercase }}
             </mat-option>
         </mat-select>
         </mat-form-field>
         <mat-form-field >
           <mat-label>Puerto de Destino</mat-label>
-          <input matInput formControlName="portDest" placeholder="Puerto de Destino">
+          <input matInput formControlName="portDest" placeholder="Puerto de Destino" upperCase>
         </mat-form-field>
 
         <mat-form-field >
           <mat-label>Especie</mat-label>
-          <mat-select formControlName="espices" placeholder="Selecciona Especie">
+          <mat-select formControlName="espices" placeholder="Selecciona Especie" aria-required="true" required upperCase>
               <mat-option *ngFor="let e of mySpecie" [value]= 'e.value'>
-                {{ e.viewValue }}
+                {{ e.viewValue | uppercase }}
               </mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field >
           <mat-label>Patente de Camión</mat-label>
-          <input matInput placeholder="Patente de Camion" formControlName="patenteCamion">
+          <input matInput placeholder="Patente de Camion" formControlName="patenteCamion" required upperCase>
         </mat-form-field>
         <mat-form-field >
           <mat-label>Patente de Carro</mat-label>
-          <input matInput placeholder="Patente de Carro" formControlName="patenteCarro">
+          <input matInput placeholder="Patente de Carro" formControlName="patenteCarro" required upperCase>
         </mat-form-field>
 
         <mat-form-field >
           <mat-label>Booking</mat-label>
-          <input matInput placeholder="Booking" formControlName="booking">
+          <input matInput placeholder="Booking" formControlName="booking" upperCase>
         </mat-form-field>
 
         <mat-form-field>
-          <mat-label>Empresa de Trasnporte</mat-label>
-          <input matInput placeholder="Empresa de transporte" formControlName="empresaTransporte">
+          <mat-label>Empresa de Trasnporte Terrestre</mat-label>
+          <input matInput placeholder="Empresa de Transporte Terrestre" formControlName="empresaTransporte" upperCase>
         </mat-form-field>
 
         <mat-form-field>
-          <mat-label>Cantidad de Pallets</mat-label>
-          <input matInput type="number"  placeholder="Importador" formControlName="cantPallets">
+          <mat-label>Cantidad de Pallets (99)</mat-label>
+          <input #inputCant matInput type="number"  placeholder="Cantidad de Pallets" formControlName="cantPallets" required>
+          <mat-hint align="end">{{ inputCant.value.toString()?.length || 2 }}/ 2</mat-hint>
+          <!-- <input matInput type="number" inputmode="numeric" maxlength="3" pattern="[0-9]*" digitOnly  placeholder="Cantidad de Pallets" formControlName="cantPallets" required> -->
         </mat-form-field>
         <mat-form-field >
+
           <mat-label>Hora de Carga</mat-label>
-          <input matInput type="time" placeholder="Importador" formControlName="horaCarga">
+          <input matInput type="time" placeholder="Hora de Carga" formControlName="horaCarga">
+
         </mat-form-field>
+        <!-- <mat-label>Termografo / Pallet</mat-label> -->
+        <div formGroupName = "termoPallets1">
+          <mat-form-field style="width: 160px; padding-right: 8px;">
+            <mat-label>Nro. Termografo</mat-label>
+            <input matInput type="text" maxlength="18" placeholder="Nro. Termografo" formControlName= "termografo" upperCase>
+          </mat-form-field>
+          <mat-form-field style="width: 150px;">
+            <mat-label>Nro. Pallet</mat-label>
+            <input matInput type="text" maxlength="18" placeholder="Nro. Pallet" formControlName= "termografoPallet" upperCase>
+          </mat-form-field>
+        </div>
+        <div formGroupName = "termoPallets2">
+          <mat-form-field style="width: 160px; padding-right: 8px;">
+            <mat-label>Nro. Termografo</mat-label>
+            <input matInput type="text" maxlength="18" placeholder="Nro. Termografo" formControlName= "termografo" upperCase>
+          </mat-form-field>
+          <mat-form-field style="width: 150px;">
+            <mat-label>Nro. Pallet</mat-label>
+            <input matInput type="text" maxlength="18" placeholder="Nro. Pallet" formControlName= "termografoPallet" upperCase>
+          </mat-form-field>
+        </div>
+
         <mat-form-field>
-          <mat-label>Número de Bolsas</mat-label>
-          <input matInput type="number" placeholder="Numero de Bolsas" formControlName="nroBolsas">
+          <mat-label>Cantidad de Cajas (9999)</mat-label>
+          <input #inputCantCajas matInput type="number" placeholder="Cantidad de Cajas" formControlName="cantCajas">
+          <mat-hint align="end">{{ inputCantCajas.value.toString()?.length || 4 }}/4</mat-hint>
         </mat-form-field>
       </form>
           <mat-card-footer>
@@ -177,14 +206,23 @@
       <form [formGroup]= "formGroup3">
 
         <mat-card-content>
+
          <section class="example-section">
             <mat-checkbox class="example-margin" color= "primary" formControlName="preEnfriado">Pre-enfriado</mat-checkbox>
             <mat-checkbox class="example-margin" color= "primary" formControlName="limpio">Limpio y sin olores</mat-checkbox>
          </section>
          <section class="example-section">
             <mat-checkbox class="example-margin" color= "primary" formControlName="buenEstado">Buen estado</mat-checkbox>
+            <mat-checkbox class="example-margin" color= "primary" formControlName="quest">QUEST</mat-checkbox>
          </section>
        </mat-card-content>
+
+       <mat-form-field >
+          <input formControlName="pti" matInput [matDatepicker]="picker1" placeholder="PTI" >
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1 startView="year"></mat-datepicker>
+     </mat-form-field>
+
         <mat-form-field>
           <mat-label>Tipo de Carga</mat-label>
           <mat-select formControlName="tipoCarga" placeholder="Selecciona el tipo de carga">
@@ -196,27 +234,51 @@
         </mat-form-field>
         <mat-form-field>
           <mat-label>Seteo de Contenedor (&deg;)</mat-label>
-          <input type="number" matInput placeholder= "Seteo de Contenedor" formControlName="seteoContainer">
+          <input type="number" matInput placeholder= "Seteo de Contenedor" formControlName="seteoContainer" required>
         </mat-form-field>
         <mat-form-field>
         <mat-label>Ventilación (CBM)</mat-label>
-        <input type="number" matInput placeholder= "Ventilación" formControlName="ventilacion">
+        <input type="number" matInput placeholder= "Ventilación" formControlName="ventilacion" required>
       </mat-form-field>
-      <mat-form-field >
+      <!-- <mat-form-field >
         <mat-label>Año Container (MMAAAA)</mat-label>
-        <input formControlName="anoContainer" maxlength="6" matInput placeholder="MMAAAA">
-      </mat-form-field>
+        <input formControlName="anoContainer" maxlength="6" matInput placeholder="MMAAAA" required>
+      </mat-form-field> -->
+
       <mat-form-field >
-        <input formControlName="pti" matInput [matDatepicker]="picker1" placeholder="PTI" >
-        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-        <mat-datepicker #picker1></mat-datepicker>
-      </mat-form-field>
+          <input formControlName="anoContainer" matInput [matDatepicker]="picker3" placeholder="Año Container" >
+          <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+          <mat-datepicker #picker3 startView="year"></mat-datepicker>
+     </mat-form-field>
+
       <mat-form-field >
         <mat-label>Quest</mat-label>
         <input formControlName="quest" matInput placeholder="Quest">
 
       </mat-form-field>
+      <div formGroupName = "admosfera">
 
+
+
+        <!-- REVISAR CODIGO PARA QUE ACTIVE O DESCATIVE LOS CAMPOS DE ADMOSFERA CONTROLADA -->
+
+        <mat-checkbox (change)="onChangeAdmosfera($event)"> Admosfera Controlada &nbsp;</mat-checkbox>
+        <mat-form-field style="width: 60px; padding-right: 8px" [hidden]= 'isAdmosferaControlada' >
+
+            <mat-label> # </mat-label>
+            <input #admPorcent matInput type="number" placeholder="#" formControlName="numero">
+            <mat-hint align="end">{{ admPorcent.value.toString()?.length || 2 }}/2</mat-hint>
+            <div [hidden]='isAdmosferaControlada ? false : true' style= "background-color: red; width:10px; height: 10px; "></div>
+          </mat-form-field>
+
+          <mat-form-field style="width: 60px;" [hidden]= 'isAdmosferaControlada' >
+
+            <mat-label> % </mat-label>
+            <input matInput #admNumber type="number"    placeholder="%" formControlName="porcentaje">
+            <mat-hint align="end">{{ admNumber.value.toString()?.length || 2 }}/2</mat-hint>
+          </mat-form-field>
+
+      </div>
 
       </form>
       <mat-card-footer>
@@ -253,6 +315,243 @@
     </mat-step>
 
     <!-- ******************************************* -->
+    <!-- **            CARGA DE PALLETS            *** -->
+    <!-- ******************************************* -->
+
+<!-- temp -->
+<mat-step [stepControl]= "formGroup5">
+
+    <mat-card >
+      <mat-card-header>
+        <mat-card-subtitle> ESTIBA PALLETS</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <form [formGroup] = "formGroup5">
+
+          <mat-tab-group>
+
+              <mat-tab label="A" style="margin-top: 20px">
+                <div formGroupName="a1">
+                  <mat-form-field style = "width: 200px; padding-right: 10px;">
+                      <mat-label>A1</mat-label>
+                      <input matInput type ="text" placeholder="Nro. Pallet" formControlName="cod" upperCase>
+
+                    </mat-form-field>
+                    <mat-form-field style="width: 50px;">
+                        <input matInput type="number" placeholder="TEMP" formControlName="temp" >
+                      </mat-form-field>
+                </div>
+                <div formGroupName="a2">
+                  <mat-form-field style = "width: 200px; padding-right: 10px;">
+                      <mat-label>A2</mat-label>
+                      <input matInput type ="text" placeholder="Nro. Pallet" formControlName="cod" upperCase>
+
+                    </mat-form-field>
+                    <mat-form-field style="width: 50px;">
+                        <input matInput type="number" placeholder="TEMP" formControlName="temp" >
+                      </mat-form-field>
+                </div>
+                <div formGroupName="a3">
+                  <mat-form-field style = "width: 200px; padding-right: 10px;">
+                      <mat-label>A3</mat-label>
+                      <input matInput type ="text" placeholder="Nro. Pallet" formControlName="cod" upperCase>
+
+                    </mat-form-field>
+                    <mat-form-field style="width: 50px;">
+                        <input matInput type="number" placeholder="TEMP" formControlName="temp" >
+                      </mat-form-field>
+                </div>
+                <div formGroupName="a4">
+                  <mat-form-field style = "width: 200px; padding-right: 10px;">
+                      <mat-label>A4</mat-label>
+                      <input matInput type ="text" placeholder="Nro. Pallet" formControlName="cod" upperCase>
+
+                    </mat-form-field>
+                    <mat-form-field style="width: 50px;">
+                        <input matInput type="number" placeholder="TEMP" formControlName="temp" >
+                      </mat-form-field>
+                </div>
+                <div formGroupName="a5">
+                  <mat-form-field style = "width: 200px; padding-right: 10px;">
+                      <mat-label>A5</mat-label>
+                      <input matInput type ="text" placeholder="Nro. Pallet" formControlName="cod" upperCase>
+
+                    </mat-form-field>
+                    <mat-form-field style="width: 50px;">
+                        <input matInput type="number" placeholder="TEMP" formControlName="temp" >
+                      </mat-form-field>
+                </div>
+                <div formGroupName="a6">
+                  <mat-form-field style = "width: 200px; padding-right: 10px;">
+                      <mat-label>A6</mat-label>
+                      <input matInput type ="text" placeholder="Nro. Pallet" formControlName="cod" upperCase>
+
+                    </mat-form-field>
+                    <mat-form-field style="width: 50px;">
+                        <input matInput type="number" placeholder="TEMP" formControlName="temp" >
+                      </mat-form-field>
+                </div>
+                <div formGroupName="a7">
+                  <mat-form-field style = "width: 200px; padding-right: 10px;">
+                      <mat-label>A7</mat-label>
+                      <input matInput type ="text" placeholder="Nro. Pallet" formControlName="cod" upperCase>
+
+                    </mat-form-field>
+                    <mat-form-field style="width: 50px;">
+                        <input matInput type="number" placeholder="TEMP" formControlName="temp" >
+                      </mat-form-field>
+                </div>
+                <div formGroupName="a8">
+                  <mat-form-field style = "width: 200px; padding-right: 10px;">
+                      <mat-label>A8</mat-label>
+                      <input matInput type ="text" placeholder="Nro. Pallet" formControlName="cod" upperCase>
+
+                    </mat-form-field>
+                    <mat-form-field style="width: 50px;">
+                        <input matInput type="number" placeholder="TEMP" formControlName="temp" >
+                      </mat-form-field>
+                </div>
+                <div formGroupName="a9">
+                  <mat-form-field style = "width: 200px; padding-right: 10px;">
+                      <mat-label>A9</mat-label>
+                      <input matInput type ="text" placeholder="Nro. Pallet" formControlName="cod" upperCase>
+
+                    </mat-form-field>
+                    <mat-form-field style="width: 50px;">
+                        <input matInput type="number" placeholder="TEMP" formControlName="temp" >
+                      </mat-form-field>
+                </div>
+                <div formGroupName="a10">
+                  <mat-form-field style = "width: 200px; padding-right: 10px;">
+                      <mat-label>A10</mat-label>
+                      <input matInput type ="text" placeholder="Nro. Pallet" formControlName="cod" upperCase>
+
+                    </mat-form-field>
+                    <mat-form-field style="width: 50px;">
+                        <input matInput type="number" placeholder="TEMP" formControlName="temp" >
+                      </mat-form-field>
+                </div>
+
+              </mat-tab>
+              <mat-tab label="B" style="margin-top: 20px;">
+                  <div formGroupName="b1">
+                      <mat-form-field style = "width: 200px; padding-right: 10px;">
+                          <mat-label>B1</mat-label>
+                          <input matInput type ="text" placeholder="Nro. Pallet" formControlName="cod" upperCase>
+
+                        </mat-form-field>
+                        <mat-form-field style="width: 50px;">
+                            <input matInput type="number" placeholder="TEMP" formControlName="temp" >
+                          </mat-form-field>
+                  </div>
+                  <div formGroupName="b2">
+                      <mat-form-field style = "width: 200px; padding-right: 10px;">
+                          <mat-label>B2</mat-label>
+                          <input matInput type ="text" placeholder="Nro. Pallet" formControlName="cod" upperCase>
+
+                        </mat-form-field>
+                        <mat-form-field style="width: 50px;">
+                            <input matInput type="number" placeholder="TEMP" formControlName="temp" >
+                          </mat-form-field>
+                  </div>
+                  <div formGroupName="b3">
+                      <mat-form-field style = "width: 200px; padding-right: 10px;">
+                          <mat-label>B3</mat-label>
+                          <input matInput type ="text" placeholder="Nro. Pallet" formControlName="cod" upperCase>
+
+                        </mat-form-field>
+                        <mat-form-field style="width: 50px;">
+                            <input matInput type="number" placeholder="TEMP" formControlName="temp" >
+                          </mat-form-field>
+                  </div>
+                  <div formGroupName="b4">
+                      <mat-form-field style = "width: 200px; padding-right: 10px;">
+                          <mat-label>B4</mat-label>
+                          <input matInput type ="text" placeholder="Nro. Pallet" formControlName="cod" upperCase>
+
+                        </mat-form-field>
+                        <mat-form-field style="width: 50px;">
+                            <input matInput type="number" placeholder="TEMP" formControlName="temp" >
+                          </mat-form-field>
+                  </div>
+                  <div formGroupName="b5">
+                      <mat-form-field style = "width: 200px; padding-right: 10px;">
+                          <mat-label>B5</mat-label>
+                          <input matInput type ="text" placeholder="Nro. Pallet" formControlName="cod" upperCase>
+
+                        </mat-form-field>
+                        <mat-form-field style="width: 50px;">
+                            <input matInput type="number" placeholder="TEMP" formControlName="temp" >
+                          </mat-form-field>
+                  </div>
+                  <div formGroupName="b6">
+                      <mat-form-field style = "width: 200px; padding-right: 10px;">
+                          <mat-label>B6</mat-label>
+                          <input matInput type ="text" placeholder="Nro. Pallet" formControlName="cod" upperCase>
+
+                        </mat-form-field>
+                        <mat-form-field style="width: 50px;">
+                            <input matInput type="number" placeholder="TEMP" formControlName="temp" >
+                          </mat-form-field>
+                  </div>
+                  <div formGroupName="b7">
+                      <mat-form-field style = "width: 200px; padding-right: 10px;">
+                          <mat-label>B7</mat-label>
+                          <input matInput type ="text" placeholder="Nro. Pallet" formControlName="cod" upperCase>
+
+                        </mat-form-field>
+                        <mat-form-field style="width: 50px;">
+                            <input matInput type="number" placeholder="TEMP" formControlName="temp" >
+                          </mat-form-field>
+                  </div>
+                  <div formGroupName="b8">
+                      <mat-form-field style = "width: 200px; padding-right: 10px;">
+                          <mat-label>B8</mat-label>
+                          <input matInput type ="text" placeholder="Nro. Pallet" formControlName="cod" upperCase>
+
+                        </mat-form-field>
+                        <mat-form-field style="width: 50px;">
+                            <input matInput type="number" placeholder="TEMP" formControlName="temp" >
+                          </mat-form-field>
+                  </div>
+                  <div formGroupName="b9">
+                      <mat-form-field style = "width: 200px; padding-right: 10px;">
+                          <mat-label>B9</mat-label>
+                          <input matInput type ="text" placeholder="Nro. Pallet" formControlName="cod" upperCase>
+
+                        </mat-form-field>
+                        <mat-form-field style="width: 50px;">
+                            <input matInput type="number" placeholder="TEMP" formControlName="temp" >
+                          </mat-form-field>
+                  </div>
+                  <div formGroupName="b10">
+                      <mat-form-field style = "width: 200px; padding-right: 10px;">
+                          <mat-label>B10</mat-label>
+                          <input matInput type ="text" placeholder="Nro. Pallet" formControlName="cod" upperCase>
+
+                        </mat-form-field>
+                        <mat-form-field style="width: 50px;">
+                            <input matInput type="number" placeholder="TEMP" formControlName="temp" >
+                          </mat-form-field>
+                  </div>
+              </mat-tab>
+
+            </mat-tab-group>
+
+            </form>
+
+      </mat-card-content>
+      <mat-card-footer>
+          <button style="margin: 20px;" mat-raised-button mat-button matStepperPrevious color="primary">Anterior</button>
+          <button style="margin: 20px;" mat-raised-button mat-button matStepperNext color="primary">Siguiente</button>
+        </mat-card-footer>
+    </mat-card>
+  </mat-step>
+
+  <!-- /temo -->
+
+
+    <!-- ******************************************* -->
     <!-- **            CARGA DE FOTOS            *** -->
     <!-- ******************************************* -->
     <mat-step>
@@ -266,35 +565,43 @@
           <!-- <mat-grid-tile  [style.background-color]= "uploaded ? 'skyblue': ''" > -->
             <mat-grid-tile >
               <div>
-                <div>Encendido Termografo1 </div>
+                <div>NRO. CONTENEDOR </div>
                 <app-uploader></app-uploader>
               </div>
             </mat-grid-tile>
             <mat-grid-tile>
               <div>
-                <div> Patente de Cambión </div>
+                <div> PATENTE DE CAMION </div>
                   <app-uploader></app-uploader>
               </div>
             </mat-grid-tile>
 
             <mat-grid-tile >
               <div>
-                <div>Patente de Carro</div>
+                <div>PATENTE DE CARRO</div>
                 <app-uploader></app-uploader>
               </div>
             </mat-grid-tile>
             <mat-grid-tile>
               <div>
-                <div>Seteo de Contenedor</div>
+                <div>SETEO DE CONTENEDOR</div>
                 <app-uploader></app-uploader>
               </div>
             </mat-grid-tile>
-            <!-- <mat-grid-tile>Lampa de Contenedor</mat-grid-tile>
-            <mat-grid-tile>Detalle de Contenedor</mat-grid-tile>
-            <mat-grid-tile>Cartones Inicio de Carga</mat-grid-tile>
-            <mat-grid-tile>Encendido Termografo1</mat-grid-tile>
-            <mat-grid-tile>Encendido Termografo2</mat-grid-tile>
-            <mat-grid-tile>Nro. Termografos</mat-grid-tile> -->
+            <mat-grid-tile><div>LAMPA DE CONTENEDOR</div><app-uploader></app-uploader> </mat-grid-tile>
+            <mat-grid-tile><div>DETALLE DE LMPA</div><app-uploader></app-uploader> </mat-grid-tile>
+            <mat-grid-tile><div>CARTONES INICIO CARGA</div><app-uploader></app-uploader> </mat-grid-tile>
+            <mat-grid-tile><div>ENCENDIDO TERMOGRAFO1 </div><app-uploader></app-uploader> </mat-grid-tile>
+            <mat-grid-tile><div>ENCENDIDO TERMOGRAFO2</div><app-uploader></app-uploader> </mat-grid-tile>
+            <mat-grid-tile><div>NUMERO TERMOGRAFO</div><app-uploader></app-uploader></mat-grid-tile>
+            <mat-grid-tile><div>POSTURA TERMOGRAFO - INICIO </div><app-uploader></app-uploader></mat-grid-tile>
+            <mat-grid-tile><div>POSTURA TERMOGRAFO - PUERTA </div><app-uploader></app-uploader></mat-grid-tile>
+            <mat-grid-tile><div>ALTURA DE PALLETS </div><app-uploader></app-uploader></mat-grid-tile>
+            <mat-grid-tile><div>CHIMENEAS </div><app-uploader></app-uploader></mat-grid-tile>
+            <mat-grid-tile><div>BUFANDAS </div><app-uploader></app-uploader></mat-grid-tile>
+            <mat-grid-tile><div>CARTON DE PISO </div><app-uploader></app-uploader></mat-grid-tile>
+            <mat-grid-tile><div>CARTON CIERRE DE CAJAS </div><app-uploader></app-uploader></mat-grid-tile>
+            <mat-grid-tile><div>AÑO DE CONTENEDOR </div><app-uploader></app-uploader></mat-grid-tile>
             <mat-divider></mat-divider>
         </mat-grid-list>
         <mat-card-footer>
@@ -341,16 +648,16 @@
             <p> <span>Empresa Trasnporte:</span>  <strong> {{ formGroup2.value['empresaTransporte'] }}</strong> </p>
             <p> <span>Cantidad de Pallets:</span> <strong>{{ formGroup2.value['cantPallets'] }}</strong> </p>
 
-            <p> <span>Hora de Carga:</span><strong> {{ formGroup2.value['horaCarga'] }}</strong> </p>
+            <p> <span>Hora de Carga:</span><strong> {{ formGroup2.value['horaCarga'] }} | shortTime</strong> </p>
 
-            <p><span> Nro de Bolas:</span> <strong> {{ formGroup2.value['nrobosas']   }} </strong></p>
+            <p><span> Cantidad de Cajas:</span> <strong> {{ formGroup2.value['cantCajas']   }} </strong></p>
             <p><span> Pre Enfriado:</span> <strong> {{ formGroup3.value['preEnfriado']   }} </strong></p>
             <p><span> Limpio y sin olores: </span> <strong> {{ formGroup3.value['limpio'] == true ? 'SI' : 'NO' }} </strong></p>
             <p><span> En buen estado:</span> <strong>  {{ formGroup3.value['buenEstado'] == true ? 'SI' : 'NO' }} </strong></p>
             <p> <span>Tipo de Carga: </span> <strong> {{ formGroup3.value['tipoCarga'] == true ? 'SI' : 'NO' }} </strong></p>
             <p><span> Seteo de Contenedor:</span> <strong>  {{ formGroup3.value['seteoContainer']  }}</strong> </p>
             <p><span> Ventilación (CBN):</span> <strong>  {{ formGroup3.value['ventilacion']  }} </strong></p>
-            <p><span> Año de Container: </span> <strong> {{ formGroup3.value['anoContainer']  }} </strong></p>
+            <p><span> Año de Container: </span> <strong> {{ formGroup3.value['anoContainer'] | date: 'dd/MM/YYYY'  }} </strong></p>
             <p><span> PTI:</span>  <strong> {{ formGroup3.value['pti'] | date: 'dd/MM/yyyy'  }}</strong> </p>
             <p><span> Quest:</span>  <strong> {{ formGroup3.value['quest'] }}</strong> </p>
             <p> Comnetarios:</p>
