@@ -39,8 +39,8 @@ export class FormService {
   informe: Informe;
   private filesNames = new Array();
 
-  // readonly URL_API = 'http://35.211.175.246/node/api/informe';
-  readonly URL_API = 'http://localhost:3000/api/informe';
+  readonly URL_API = 'http://35.211.175.246/node/api/informe';
+  // readonly URL_API = 'http://localhost:3000/api/informe';
   constructor(private http: HttpClient) {}
 
   postInforme(infome: Informe) {

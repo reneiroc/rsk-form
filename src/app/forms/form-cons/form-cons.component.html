@@ -6,7 +6,8 @@
 
   <!-- <mat-horizontal-stepper linear [hidden]= '!enviado ? false : true'> -->
 
-  <mat-horizontal-stepper linear >
+  <!-- <mat-horizontal-stepper linear > -->
+  <mat-horizontal-stepper  >
     <!-- ******************  FORMULARIO 1 ************************-->
     <!-- *                                                       *-->
     <!-- ******************  FORMULARIO 1 ************************-->
@@ -43,7 +44,7 @@
           </div>
         </form>
         <mat-card-footer>
-            <button class="bt-right" mat-raised-button mat-button matStepperNext color="primary">Siguiente</button>
+            <button style="margin: 20px;" class="bt-right" mat-raised-button mat-button matStepperNext color="primary">Siguiente</button>
         </mat-card-footer>
 
 
@@ -190,8 +191,8 @@
         </mat-form-field>
       </form>
           <mat-card-footer>
-              <button class="bt-left" mat-raised-button mat-button matStepperPrevious color="primary">Anterior</button>
-              <button class="bt-right" mat-raised-button mat-button matStepperNext color="primary">Siguiente</button>
+              <button style="margin: 20px;" class="bt-left" mat-raised-button mat-button matStepperPrevious color="primary">Anterior</button>
+              <button  style="margin: 20px;" class="bt-right" mat-raised-button mat-button matStepperNext color="primary">Siguiente</button>
             </mat-card-footer>
     </mat-card>
     </mat-step>
@@ -282,8 +283,8 @@
 
       </form>
       <mat-card-footer>
-        <button class="bt-left" mat-raised-button mat-button matStepperPrevious color="primary">Anterior</button>
-        <button class="bt-right" mat-raised-button mat-button matStepperNext color="primary">Siguiente</button>
+        <button style="margin: 20px;" class="bt-left" mat-raised-button mat-button matStepperPrevious color="primary">Anterior</button>
+        <button style="margin: 20px;" class="bt-right" mat-raised-button mat-button matStepperNext color="primary">Siguiente</button>
       </mat-card-footer>
 
     </mat-card>
@@ -588,25 +589,25 @@
                 <app-uploader></app-uploader>
               </div>
             </mat-grid-tile>
-            <mat-grid-tile><div>LAMPA DE CONTENEDOR</div><app-uploader></app-uploader> </mat-grid-tile>
-            <mat-grid-tile><div>DETALLE DE LMPA</div><app-uploader></app-uploader> </mat-grid-tile>
-            <mat-grid-tile><div>CARTONES INICIO CARGA</div><app-uploader></app-uploader> </mat-grid-tile>
-            <mat-grid-tile><div>ENCENDIDO TERMOGRAFO1 </div><app-uploader></app-uploader> </mat-grid-tile>
-            <mat-grid-tile><div>ENCENDIDO TERMOGRAFO2</div><app-uploader></app-uploader> </mat-grid-tile>
-            <mat-grid-tile><div>NUMERO TERMOGRAFO</div><app-uploader></app-uploader></mat-grid-tile>
-            <mat-grid-tile><div>POSTURA TERMOGRAFO - INICIO </div><app-uploader></app-uploader></mat-grid-tile>
-            <mat-grid-tile><div>POSTURA TERMOGRAFO - PUERTA </div><app-uploader></app-uploader></mat-grid-tile>
-            <mat-grid-tile><div>ALTURA DE PALLETS </div><app-uploader></app-uploader></mat-grid-tile>
-            <mat-grid-tile><div>CHIMENEAS </div><app-uploader></app-uploader></mat-grid-tile>
-            <mat-grid-tile><div>BUFANDAS </div><app-uploader></app-uploader></mat-grid-tile>
-            <mat-grid-tile><div>CARTON DE PISO </div><app-uploader></app-uploader></mat-grid-tile>
-            <mat-grid-tile><div>CARTON CIERRE DE CAJAS </div><app-uploader></app-uploader></mat-grid-tile>
-            <mat-grid-tile><div>AÑO DE CONTENEDOR </div><app-uploader></app-uploader></mat-grid-tile>
+            <mat-grid-tile><div><div>LAMPA DE CONTENEDOR</div><app-uploader></app-uploader> </div></mat-grid-tile>
+            <mat-grid-tile><div><div>DETALLE DE LMPA</div><app-uploader></app-uploader> </div></mat-grid-tile>
+            <mat-grid-tile><div><div>CARTONES INICIO CARGA</div><app-uploader></app-uploader> </div></mat-grid-tile>
+            <mat-grid-tile><div><div>ENCENDIDO TERMOGRAFO1 </div><app-uploader></app-uploader> </div></mat-grid-tile>
+            <mat-grid-tile><div><div>ENCENDIDO TERMOGRAFO2</div><app-uploader></app-uploader></div> </mat-grid-tile>
+            <mat-grid-tile><div><div>NUMERO TERMOGRAFO</div><app-uploader></app-uploader></div></mat-grid-tile>
+            <mat-grid-tile><div><div>POSTURA TERMOGRAFO - INICIO </div><app-uploader></app-uploader></div></mat-grid-tile>
+            <mat-grid-tile><div><div>POSTURA TERMOGRAFO - PUERTA </div><app-uploader></app-uploader></div></mat-grid-tile>
+            <mat-grid-tile><div><div>ALTURA DE PALLETS </div><app-uploader></app-uploader></div></mat-grid-tile>
+            <mat-grid-tile><div><div>CHIMENEAS </div><app-uploader></app-uploader></div></mat-grid-tile>
+            <mat-grid-tile><div><div>BUFANDAS </div><app-uploader></app-uploader></div></mat-grid-tile>
+            <mat-grid-tile><div><div>CARTON DE PISO </div><app-uploader></app-uploader></div></mat-grid-tile>
+            <mat-grid-tile><div><div>CARTON CIERRE DE CAJAS </div><app-uploader></app-uploader></div></mat-grid-tile>
+            <mat-grid-tile><div><div>AÑO DE CONTENEDOR </div><app-uploader></app-uploader></div></mat-grid-tile>
             <mat-divider></mat-divider>
         </mat-grid-list>
         <mat-card-footer>
-            <button class="bt-left" mat-raised-button mat-button matStepperPrevious color="primary">Anterior</button>
-            <button class="bt-right" mat-raised-button mat-button matStepperNext color="primary">Siguiente</button>
+            <button style="margin: 20px;" class="bt-left" mat-raised-button mat-button matStepperPrevious color="primary">Anterior</button>
+            <button style="margin: 20px;" class="bt-right" mat-raised-button mat-button matStepperNext color="primary">Siguiente</button>
         </mat-card-footer>
       </mat-card>
     </mat-step>

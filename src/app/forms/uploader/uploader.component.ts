@@ -6,8 +6,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 // import { FormService } from '../../form.service';
 // import { Informe } from 'src/app/models/informe';
 // import { request } from 'http';
-const uploadUrl = 'http://localhost:3000/api/informe/uploader'; // para definir servidor de upload
-// const uploadUrl = 'http://35.211.175.246/node/api/informe/uploader'; // para definir servidor de upload
+// const uploadUrl = 'http://localhost:3000/api/informe/uploader'; // para definir servidor de upload
+const uploadUrl = 'http://35.211.175.246/node/api/informe/uploader'; // para definir servidor de upload
 
 interface Respuesta {
   file?: string;

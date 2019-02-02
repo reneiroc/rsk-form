@@ -23,11 +23,12 @@ html, body { height: 100%;}
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .bt-left{
   float: left;
-  margin-top: 20px;
+  margin: 20px;
 }
 .bt-right{
   float: right;
-  margin-top: 20px;
+  // margin-top: 20px;
+  margin: 20px;
 }
 
 .mat-tab-label {
