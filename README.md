@@ -1,3 +1,14 @@
+# Instalaciòn
+
+Una ves dentro de la carpeta del proyecto ejecutar npm install
+
+# Ejecutar modo en desarrollo
+
+Dentro de la carpeta del proyecto ejecutar ng serve
+
+Ingresar en el navegador: `http://localhost:4200/`
+
+
 # RskForm
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.4.
